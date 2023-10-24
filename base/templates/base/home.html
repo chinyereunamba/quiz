@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        .quiz{
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid #eed;
+            padding: 0.5rem 1rem;
+        }
+
+        .quiz h2{
+            color: blueviolet;
+        }
+
+        .quiz button{
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .quiz p{
+            color: #677;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to my quiz app</h1>
+    {% for i in quizzes %}
+
+    <div class="quiz">
+        <h2>
+            {{i.title}}
+        </h2>
+        <p>{{i.description}}</p>
+        <button type="button">Take quiz</button>
+    </div>
+
+    {% endfor %}
+</body>
+</html>

@@ -21,11 +21,12 @@ class CustomUserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-    
+
     def create_superuser(self, email_address, password):
         user = self.create_user(email_address=email_address, password=password)
 
         user.is_admin = True
+        user.is_staff = True
         user.is_superuser = True
 
         user.save(using=self._db)
@@ -33,24 +34,36 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-
 class CustomUser(AbstractBaseUser):
-    email_address = models.EmailField(max_length=80, verbose_name="Email Address")
+    email_address = models.EmailField(
+        max_length=80, verbose_name="Email Address", unique=True
+    )
     first_name = models.CharField(max_length=125, blank=True)
     last_name = models.CharField(max_length=125, blank=True)
 
     date_joined = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    last_login = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = "email"
+    USERNAME_FIELD = "email_address"
+
+    class Meta:
+        ordering = ['email_address']
 
     def __str__(self) -> str:
         return self.email_address
+    
+    def has_module_perms(self, app_label):
+        return True
+
+    def has_perm(self, obj=None):
+        return self.is_admin
 
 
 class Quiz(models.Model):
@@ -62,7 +75,7 @@ class Quiz(models.Model):
     duration = models.PositiveIntegerField(default=5)
     date_created = models.DateTimeField(auto_now_add=True)
 
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True, null=True)
 
     def __str__(self) -> str:
         return self.title
@@ -88,6 +101,7 @@ class Quiz(models.Model):
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question = models.TextField(blank=False, null=False)
+    date_created= models.DateField(auto_now_add=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.question} in {self.quiz}"
