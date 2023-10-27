@@ -4,6 +4,5 @@ from .views import *
 
 urlpatterns = [
     path("", home, name='home'),
-    path('create-quiz/', QuizCreateView.as_view(), name='quiz'),
-    path('create-question/', QuestionCreateView.as_view(), name='question'),
+    path('create-quiz/', parse_quiz_view, name='quiz'),
 ]
