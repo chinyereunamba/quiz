@@ -7,23 +7,27 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 
+from django.utils.translation import gettext_lazy as _
+
 # Create your models here.
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email_address, password, *args, **kwargs):
-        if not email_address:
-            raise ValueError("Users must have an email address")
+    def create_user(self, email, username, password, **extra_fields):
+        if not email:
+            raise ValueError(_("Users must have an email address"))
 
-        email_address = self.normalize_email(email=email_address).lower()
-        user = self.model(email_address=email_address, *args, **kwargs)
+        email = self.normalize_email(email=email).lower()
+        user = self.model(email=email, username=username, **extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email_address, password):
-        user = self.create_user(email_address=email_address, password=password)
+    def create_superuser(self, email, username, password, **extra_fields):
+        user = self.create_user(
+            email=email, username=username, password=password, **extra_fields
+        )
 
         user.is_admin = True
         user.is_staff = True
@@ -34,12 +38,11 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser):
-    email_address = models.EmailField(
-        max_length=80, verbose_name="Email Address", unique=True
-    )
-    first_name = models.CharField(max_length=125, blank=True)
-    last_name = models.CharField(max_length=125, blank=True)
+class CustomUser(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(_("email address"), max_length=80, unique=True)
+    username = models.CharField(_("username"), max_length=40, unique=True)
+    first_name = models.CharField(_("first name"), max_length=125, blank=True)
+    last_name = models.CharField(_("last name"), max_length=125, blank=True)
 
     date_joined = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     last_login = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -51,14 +54,16 @@ class CustomUser(AbstractBaseUser):
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = "email_address"
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     class Meta:
-        ordering = ['email_address']
+        verbose_name = 'User'
+        ordering = ["email"]
 
     def __str__(self) -> str:
-        return self.email_address
-    
+        return self.email
+
     def has_module_perms(self, app_label):
         return True
 
@@ -102,7 +107,7 @@ class Quiz(models.Model):
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question = models.TextField(blank=False, null=False)
-    date_created= models.DateField(auto_now_add=True, blank=True)
+    date_created = models.DateField(auto_now_add=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.question} in {self.quiz}"
@@ -110,8 +115,19 @@ class Question(models.Model):
 
 class AnswerChoice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answer = models.CharField(max_length=500)
-    is_correct_answer = models.BooleanField(default=False)
+    option_1 = models.CharField(max_length=500)
+    option_2 = models.CharField(max_length=500)
+    option_3 = models.CharField(max_length=500)
+    option_4 = models.CharField(max_length=500)
+    ANSWER_CHOICES = [
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+        ('D', 'D'),
+    ]
+    correct_answer = models.CharField(
+        choices=ANSWER_CHOICES, max_length=125, blank=True
+    )
 
     def __str__(self) -> str:
         return f"answer for {self.question}"

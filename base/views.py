@@ -11,9 +11,10 @@ from .utils.quiz_parser import *
 
 # Create your views here.
 
-@login_required(login_url='/login')
+
+@login_required(login_url="/login")
 def home(request):
-    model = Quiz.objects.all()
+    model = Quiz.objects.filter(user=request.user)
     context = {"quizzes": model}
 
     return render(request, "base/home.html", context)
@@ -21,14 +22,12 @@ def home(request):
 
 def register(request):
     form = CustomUserCreationForm()
-    if request.method == 'POST':
+    if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-    else:
-        return redirect('login')
-    
-    return render(request, 'base/sign_up.html', {'form': form})
+
+    return render(request, "base/sign_up.html", {"form": form})
 
 
 def login_view(request):
@@ -48,6 +47,11 @@ def login_view(request):
         except Exception as e:
             print("There was an error")
     return render(request, "base/login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("login")
 
 
 @login_required(login_url="login")
@@ -82,16 +86,41 @@ def parse_quiz_view(request):
 
             option_index = ["A", "B", "C", "D"]
 
-            for option in options:
-                correct = False
-                for i in option_index:
-                    if question["correct_answer"] == i and option_index.index(
-                        i
-                    ) == options.index(option):
-                        correct = True
-                AnswerChoice.objects.create(
-                    question=question_create, answer=option, is_correct_answer=correct
-                )
+            AnswerChoice.objects.create(
+                question=question_create,
+                option_1=options[0][3:],
+                option_2=options[1],
+                option_3=options[2],
+                option_4=options[3],
+                correct_answer=question["correct_answer"],
+            )
+
         return redirect("home")
 
     return render(request, "base/form.html")
+
+
+def quiz(request, slug):
+    quiz_model = Quiz.objects.get(slug=slug)
+    question = Question.objects.filter(quiz=quiz_model).order_by("?")[
+        : quiz_model.number_of_questions
+    ]
+    answers = AnswerChoice.objects.filter(question__in=question)
+
+    u = []
+    for i in question:
+        u.append(
+            {
+                "question": i,
+                "answer": {
+                    "option_1": AnswerChoice.objects.get(question=i).option_1,
+                    "option_2": AnswerChoice.objects.get(question=i).option_2,
+                    "option_3": AnswerChoice.objects.get(question=i).option_3,
+                    "option_4": AnswerChoice.objects.get(question=i).option_4,
+                },
+            }
+        )
+
+    context = {"quiz": quiz, "questions": question, "answers": answers, "dict": u}
+
+    return render(request, "base/quiz.html", context)

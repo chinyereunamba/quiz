@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <style>
+        .options{
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    </style>
+  </head>
+  <body>
+      <form action="" method="post">
+          {% csrf_token %} 
+
+          {% for i in dict %}
+            <h2>{{i.question.question}}</h2>
+            <div class="options">
+                <label for='{{i.answer.option_1}}{{i.question.id}}'>
+                    <input type="radio" id="{{i.answer.option_1}}{{i.question.id}}" name={{i.question.id}} value={{i.answer.option_1}}>
+                    A. {{i.answer.option_1}}
+                </label>
+                <label for='{{i.answer.option_2}}{{i.question.id}}'>
+                    <input type="radio" id="{{i.answer.option_2}}{{i.question.id}}"  name={{i.question.id}} value={{i.answer.option_2}}>
+                    B. {{i.answer.option_2}}
+                </label>
+                <label for='{{i.answer.option_3}}{{i.question.id}}'>
+                    <input type="radio" id="{{i.answer.option_3}}{{i.question.id}}"  name={{i.question.id}} value={{i.answer.option_3}}>
+                    C. {{i.answer.option_3}}
+                </label>
+                <label for="{{i.answer.option_4}}{{i.question.id}}">
+                    <input type="radio" id="{{i.answer.option_4}}{{i.question.id}}" name={{i.question.id}} value={{i.answer.option_4}}>
+                    D. {{i.answer.option_4}}
+                </label>
+            </div>
+          {% endfor %}
+          
+      <button type="submit">Submit Quiz</button>
+    </form>
+  </body>
+</html>

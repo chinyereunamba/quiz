@@ -2,12 +2,7 @@ import google.generativeai as palm
 
 def get_questions(key: str, no: int, description: str):
     palm.configure(api_key=key)
-    models = [
-        m
-        for m in palm.list_models()
-        if "generateText" in m.supported_generation_methods
-    ]
-    model = models[0].name
+    model = "models/text-bison-001"
 
     prompt = f"""
     create a multichoice quiz with {no} questions and their answers based on with no snippets {description} strictly in the format

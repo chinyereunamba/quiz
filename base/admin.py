@@ -8,46 +8,20 @@ from .forms import *
 
 class CustomUserAdmin(UserAdmin):
     list_display = [
-        "email_address",
+        "email",
+        "username",
         "is_active",
-        "is_admin",
         "is_superuser",
         "date_joined",
         "last_login",
     ]
-    search_fields = ["email_address"]
+    search_fields = ["email", "username"]
     readonly_fields = ["id", "date_joined", "last_login"]
     filter_horizontal = ()
-    list_filter = ()
+    list_filter = ("email", "username", "is_active")
+    fieldsets = ()
 
-    add_fieldsets = UserAdmin.add_fieldsets + (
-        (
-            None,
-            {
-                "fields": (
-                    "email_address",
-                    "first_name",
-                    "last_name",
-                )
-            },
-        ),
-    )
-    fieldsets = (
-        (
-            None,
-            {
-                "fields": (
-                    (
-                        "email_address",
-                        "first_name",
-                        "last_name",
-                    )
-                ),
-            },
-        ),
-    )
-
-    ordering = ["email_address"]
+    ordering = ["email"]
 
 
 class QuizAdmin(admin.ModelAdmin):
@@ -57,7 +31,7 @@ class QuizAdmin(admin.ModelAdmin):
 
 
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ["answer", "is_correct_answer"]
+    list_display = ["option_1", 'option_2', 'option_3', 'option_4', "correct_answer"]
 
 
 class QuestionAdmin(admin.ModelAdmin):

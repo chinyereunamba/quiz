@@ -34,11 +34,11 @@
 </head>
 <body>
     {% if request.user.is_authenticated %}
-    <h2>{{request.user.first_name}}</h2>
+    <h2>{{request.user.username}}</h2>
 
     {% endif %}
     <h1>Welcome to my quiz app</h1>
-    <a href="{% url 'quiz' %}">Create quiz</a>
+    <a href="{% url 'create-quiz' %}">Create quiz</a>
     <div>
 
         {% for i in quizzes %}
@@ -48,7 +48,7 @@
                 {{i.title}}
             </h2>
             <p>{{i.description}}</p>
-            <button type="button">Take quiz</button>
+            <button type="button"><a href="{% url 'quiz' i.slug %}">Take quiz</a></button>
         </div>
     
         {% endfor %}
