@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            width: 100%;
+            margin: 5rem auto;
+            gap: 1rem;
+        }
+
+        form input, form button{
+            padding: 0.5rem 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

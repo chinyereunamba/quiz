@@ -1,18 +1,54 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import *
+from .forms import *
 
 # Register your models here.
 
+
 class CustomUserAdmin(UserAdmin):
-    list_display = ['email_address', "is_active", 'is_admin', 'is_superuser', 'date_joined', 'last_login']
-    search_fields = ['email_address']
-    readonly_fields = ['id', 'date_joined', 'last_login']
+    list_display = [
+        "email_address",
+        "is_active",
+        "is_admin",
+        "is_superuser",
+        "date_joined",
+        "last_login",
+    ]
+    search_fields = ["email_address"]
+    readonly_fields = ["id", "date_joined", "last_login"]
     filter_horizontal = ()
     list_filter = ()
-    fieldsets = ()
 
-    ordering = ['email_address']
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (
+            None,
+            {
+                "fields": (
+                    "email_address",
+                    "first_name",
+                    "last_name",
+                )
+            },
+        ),
+    )
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    (
+                        "email_address",
+                        "first_name",
+                        "last_name",
+                    )
+                ),
+            },
+        ),
+    )
+
+    ordering = ["email_address"]
+
 
 class QuizAdmin(admin.ModelAdmin):
     list_display = ["title", "number_of_questions", "duration", "date_created"]
@@ -22,6 +58,7 @@ class QuizAdmin(admin.ModelAdmin):
 
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ["answer", "is_correct_answer"]
+
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ["question", "quiz"]

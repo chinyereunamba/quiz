@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <style>
+        body > div{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
         .quiz{
             max-width: 400px;
             width: 100%;
@@ -14,6 +19,7 @@
 
         .quiz h2{
             color: blueviolet;
+            text-transform: capitalize;
         }
 
         .quiz button{
@@ -27,18 +33,25 @@
     </style>
 </head>
 <body>
+    {% if request.user.is_authenticated %}
+    <h2>{{request.user.first_name}}</h2>
+
+    {% endif %}
     <h1>Welcome to my quiz app</h1>
     <a href="{% url 'quiz' %}">Create quiz</a>
-    {% for i in quizzes %}
+    <div>
 
-    <div class="quiz">
-        <h2>
-            {{i.title}}
-        </h2>
-        <p>{{i.description}}</p>
-        <button type="button">Take quiz</button>
+        {% for i in quizzes %}
+    
+        <div class="quiz">
+            <h2>
+                {{i.title}}
+            </h2>
+            <p>{{i.description}}</p>
+            <button type="button">Take quiz</button>
+        </div>
+    
+        {% endfor %}
     </div>
-
-    {% endfor %}
 </body>
 </html>

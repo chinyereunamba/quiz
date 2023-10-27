@@ -67,6 +67,7 @@ class CustomUser(AbstractBaseUser):
 
 
 class Quiz(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     title = models.CharField(
         max_length=250, blank=False, null=False, help_text="Title of your quiz"
     )
