@@ -8,7 +8,7 @@ function SectionOne() {
   return (
     <section className="flex flex-col min-h-unit-4xl items-center justify-center gap-unit-2xl">
       <h1 className="text-6xl font-semibold mb-8">Popular Quiz Categories</h1>
-      <section className="flex flex-col gap-0 min-w-full ">
+      <section className="categories flex flex-col gap-0 min-w-full ">
         <div className="flex">
           <div className="img">
             <img src="/img-1.jpg" alt="" />

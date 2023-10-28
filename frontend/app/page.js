@@ -1,6 +1,6 @@
-import Intro from "./component/Intro";
-import SectionOne from "./component/SectionOne";
-import SectionTwo from "./component/SectionTwo";
+import Intro from "./components/Intro";
+import SectionOne from "./components/SectionOne";
+import SectionTwo from "./components/SectionTwo";
 
 export default function Home() {
   return (

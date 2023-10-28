@@ -11,6 +11,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/react";
+import { NavigationMenu } from "../ui/navigation-menu";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,6 +19,7 @@ export default function App() {
   const menuItems = ["Home", "Quizzes", "Contact", "About"];
 
   return (
+    
     <Navbar shouldHideOnScroll>
       <NavbarBrand>
         <p>Quiz</p>
@@ -25,7 +27,7 @@ export default function App() {
       <NavbarContent justify="center">
         {menuItems.map((item, index) => (
           <NavbarItem key={index}>
-            <Link href="#" color="foreground">
+            <Link href="#" color="foreground" className="text-lg">
               {item}
             </Link>
           </NavbarItem>
@@ -33,10 +35,18 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="#" className="text-lg">
+            Login
+          </Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button
+            as={Link}
+            className="text-lg"
+            color="primary"
+            href="#"
+            variant="flat"
+          >
             Sign Up
           </Button>
         </NavbarItem>

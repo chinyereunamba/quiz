@@ -14,9 +14,9 @@ function SectionTwo() {
         Our app offers a wide range of quizzes on various topics. Challenge your
         knowledge and learn new things in a fun way.
       </p>
-      <div className="my-3">
+      <div className="my-10">
         <h2 className="text-3xl">Key Features</h2>
-        <div className="my-9 flex gap-3 justify-between">
+        <div className="my-10 flex gap-3 justify-between flex-wrap">
           {features.map((feature, index) => (
             <FeaturesCard key={index} title={feature} />
           ))}
