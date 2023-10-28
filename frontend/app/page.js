@@ -1,9 +1,13 @@
-import Image from 'next/image'
+import Intro from "./component/Intro";
+import SectionOne from "./component/SectionOne";
+import SectionTwo from "./component/SectionTwo";
 
 export default function Home() {
   return (
     <main className="">
-      <h1 className='text-4xl'>Hello world</h1>
+      <Intro />
+      <SectionOne />
+      <SectionTwo />
     </main>
-  )
+  );
 }
