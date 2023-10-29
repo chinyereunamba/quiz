@@ -14,8 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Providers>
-        <NavbarComponent />
-        {children}
+          {children}
       </Providers>
     </html>
   )
