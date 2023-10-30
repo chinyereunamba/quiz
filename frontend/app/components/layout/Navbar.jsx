@@ -23,6 +23,7 @@ export default function App() {
     { name: "About", link: "/" },
   ];
 
+
   return (
     <Navbar
       shouldHideOnScroll
@@ -51,7 +52,7 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden md:flex">
-          <Link href="#" className="text-lg" color="foreground">
+          <Link href="./login" className="text-lg" color="foreground">
             Login
           </Link>
         </NavbarItem>
@@ -60,7 +61,7 @@ export default function App() {
             as={Link}
             className="font-medium"
             color="primary"
-            href="#"
+            href="/sign-up"
             variant="solid"
             radius="sm"
           >
@@ -70,14 +71,16 @@ export default function App() {
       </NavbarContent>
 
       <NavbarMenu>
-        {menuItems.push({ name: "Login", link: "/" })}
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" color={"foreground"} href="#" size="lg">
-              {item}
+            <Link className="w-full font-semibold" color={"foreground"} href={item.link} size="lg">
+              {item.name}
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem>
+          <Link className="w-full font-semibold" color="foreground" href="/login" size="lg">Login</Link>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );

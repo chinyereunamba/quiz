@@ -14,7 +14,7 @@ module.exports = {
         colors: {
           'background': '#FFFDF7',
           'foreground': '#0a2342',
-          'content1': { DEFAULT: '#D9EDE2', foreground: '#0a2342' },
+          'content1': '#D9EDE2',
           'content2': '#A2D2B7',
           'content3': '#85BC9D', // used for card, modal, popover, etc.
           'content4': '#D9EDE2', // used for card, modal, popover, etc.

@@ -12,9 +12,15 @@ import {
 export default function Testimony({content, name}) {
 
   return (
-    <Card className="max-w-[400px]">
+    <Card
+      className="max-w-[400px]"
+      isHoverable
+      isPressable
+      onPress={() => console.log("item pressed")}
+      shadow="none"
+    >
       <CardBody className="text-small text-default-400 justify-center">
-        <p color="foreground" className="text-lg text-center">
+        <p className="text-lg text-center " color="foreground">
           {content}
         </p>
       </CardBody>

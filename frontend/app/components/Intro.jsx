@@ -11,7 +11,7 @@ function Intro() {
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque eveniet
         minus fugiat at deleniti cumque inventore magni hic? Aperiam, dolores!
       </p>
-      <Button size="lg" radius="sm" color="primary" className="font-semibold" as={Link} variant="solid">
+      <Button size="lg" radius="sm" color="primary" className="font-semibold" as={Link} href="/login" variant="solid">
         Start Quiz Now
       </Button>
     </section>

@@ -4,7 +4,7 @@ import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
 export default function FeaturesCard({title, img}) {
   return (
-    <Card className="py-4 w-72 border-0" isHoverable>
+    <Card className="py-4 w-72 border-0 cursor-pointer" isHoverable shadow="none">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
         <h4 className="font-bold text-large">{title}</h4>
       </CardHeader>
