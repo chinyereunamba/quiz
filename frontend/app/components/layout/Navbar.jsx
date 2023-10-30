@@ -10,52 +10,59 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  link,
 } from "@nextui-org/react";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ["Home", "Quizzes", "Contact", "About"];
+  const menuItems = [
+    { name: "Home", link: "/" },
+    { name: "Quizzes", link: "/" },
+    { name: "Contact", link: "/" },
+    { name: "About", link: "/" },
+  ];
 
   return (
     <Navbar
-      // shouldHideOnScroll
+      shouldHideOnScroll
       maxWidth="full"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent className="" justify="start">
         <NavbarMenuToggle
-          className="sm:hidden"
+          className="md:hidden"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit text-lg">QuizApp</p>
+          <p className="font-bold text-inherit text-lg uppercase">QuizApp</p>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent justify="center" className="hidden md:flex">
         {menuItems.map((item, index) => (
           <NavbarItem key={index}>
-            <Link href="#" color="foreground" className="text-lg">
-              {item}
+            <Link href={item.link} color="foreground" className="text-lg">
+              {item.name}
             </Link>
           </NavbarItem>
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="">
-          <Link href="#" className="">
+        <NavbarItem className="hidden md:flex">
+          <Link href="#" className="text-lg" color="foreground">
             Login
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Button
             as={Link}
-            className=""
+            className="font-medium"
             color="primary"
             href="#"
-            variant="flat"
+            variant="solid"
+            radius="sm"
           >
             Sign Up
           </Button>
@@ -63,20 +70,10 @@ export default function App() {
       </NavbarContent>
 
       <NavbarMenu>
+        {menuItems.push({ name: "Login", link: "/" })}
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={
-                index === 2
-                  ? "warning"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              href="#"
-              size="lg"
-            >
+            <Link className="w-full" color={"foreground"} href="#" size="lg">
               {item}
             </Link>
           </NavbarMenuItem>

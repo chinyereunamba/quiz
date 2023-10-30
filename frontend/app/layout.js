@@ -1,9 +1,12 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import { Providers } from './providers'
-import NavbarComponent from './components/layout/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  subsets: ['latin']
+})
 
 export const metadata = {
   title: 'Quiz App',
@@ -12,7 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={poppins.className}>
       <Providers>
           {children}
       </Providers>
