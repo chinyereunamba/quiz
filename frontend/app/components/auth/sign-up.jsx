@@ -12,7 +12,10 @@ function SignUpForm() {
 
   return (
     <>
-      <form className="flex gap-6 flex-col w-3/5" autoComplete="none">
+      <form
+        className="flex gap-6 flex-col w-full max-w-[600px]"
+        autoComplete="none"
+      >
         <div className="flex">
           <Input
             type="text"
@@ -22,7 +25,7 @@ function SignUpForm() {
             className=" w-full"
           />
         </div>
-        <div className="flex">
+        <div className="flex ">
           <Input
             type="text"
             label="Last name"
@@ -85,13 +88,18 @@ function SignUpForm() {
           />
         </div>
         <div className="flex">
-          <Button color="primary" type="submit" radius="sm" className="w-full font-semibold">
+          <Button
+            color="primary"
+            type="submit"
+            radius="sm"
+            className="w-full font-semibold"
+          >
             Sign up
           </Button>
         </div>
       </form>
 
-      <div className="flex w-3/5 justify-between my-4 p-2">
+      <div className="flex w-full max-w-[600px] justify-between my-4 p-2">
         <Link color="foreground" underline="hover" href="/login">
           Already have an account? Login
         </Link>

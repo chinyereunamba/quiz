@@ -12,8 +12,8 @@ function LoginForm() {
 
   return (
     <>
-      <form className="flex gap-6 flex-col w-3/5" autoComplete="none">
-        <div className="flex">
+      <form className="flex gap-6 flex-col max-w-[600px] w-full justify-center">
+        <div className="flex ">
           <Input
             type="email"
             label="Email"
@@ -50,18 +50,23 @@ function LoginForm() {
           </Checkbox>
         </div>
         <div className="flex">
-          <Button color="primary" type="submit" radius="sm" className="font-semibold w-full">
+          <Button
+            color="primary"
+            type="submit"
+            radius="sm"
+            className="font-semibold w-full"
+          >
             Login
           </Button>
         </div>
       </form>
 
-      <div className="flex w-3/5 justify-between my-4 p-2" color="foreground">
+      <div className="flex max-w-[600px] w-full justify-between my-4 p-2" color="foreground">
         <Link color="foreground" underline="hover" href="/forgot-password">
           Forgot password?
         </Link>
         <Link color="foreground" underline="hover" href="/sign-up">
-          Don't have an account? Sign up
+          Don&apos;t have an account? Sign up
         </Link>
       </div>
     </>

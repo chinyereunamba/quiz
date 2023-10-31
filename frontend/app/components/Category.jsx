@@ -4,13 +4,14 @@ import { Image } from "@nextui-org/react";
 function Category({img, title, description}) {
   return (
     <div className="flex flex-col md:flex-row-reverse justify-center">
-      <div className="img rounded-md">
+      <div className="img rounded-md justify-self-center">
         <Image
           width={500}
           height={400}
           src={img}
           className="w-full"
           alt={title}
+          isZoomed
         />
       </div>
       <div className="lg:p-6 category gap-6 lg:gap-10 lg:w-1/2">
