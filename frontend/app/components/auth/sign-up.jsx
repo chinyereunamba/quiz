@@ -92,6 +92,7 @@ function SignUpForm() {
             color="primary"
             type="submit"
             radius="sm"
+            size="lg"
             className="w-full font-semibold"
           >
             Sign up

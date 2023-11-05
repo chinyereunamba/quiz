@@ -9,7 +9,7 @@ function page() {
     <Section>
       <Title title={"Sign up"} />
       <SignUpForm />
-      <p className=" font-normal mt-5">
+      <p className=" font-normal mt-5 text-center">
         &copy; 2023{" "}
         <Link href="/" className="font-medium" color="foreground">
           QuizApp

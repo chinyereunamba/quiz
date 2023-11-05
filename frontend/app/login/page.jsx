@@ -9,7 +9,7 @@ function page() {
     <Section>
       <Title title={"Login"} />
       <LoginForm />
-      <p className=" font-normal mt-10">&copy; 2023 <Link href='/' className='font-medium' color='foreground'>QuizApp</Link>. All rights reserved</p>
+      <p className=" font-normal mt-10 text-center">&copy; 2023 <Link href='/' className='font-medium' color='foreground'>QuizApp</Link>. All rights reserved</p>
     </Section>
   );
 }

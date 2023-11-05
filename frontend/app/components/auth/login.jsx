@@ -54,6 +54,7 @@ function LoginForm() {
             color="primary"
             type="submit"
             radius="sm"
+            size="lg"
             className="font-semibold w-full"
           >
             Login
@@ -61,7 +62,7 @@ function LoginForm() {
         </div>
       </form>
 
-      <div className="flex max-w-[600px] w-full justify-between my-4 p-2" color="foreground">
+      <div className="flex flex-col gap-3 md:flex-row max-w-[600px] w-full justify-between my-4 p-2" color="foreground">
         <Link color="foreground" underline="hover" href="/forgot-password">
           Forgot password?
         </Link>

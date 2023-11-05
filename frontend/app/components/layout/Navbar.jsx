@@ -19,7 +19,7 @@ export default function App() {
   const menuItems = [
     { name: "Home", link: "/" },
     { name: "Quizzes", link: "/" },
-    { name: "Contact", link: "/" },
+    { name: "Contact", link: "/contact" },
     { name: "About", link: "/" },
   ];
 
