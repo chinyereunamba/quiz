@@ -1,14 +1,17 @@
 // app/providers.tsx
 "use client";
 
+import { SessionProvider } from "next-auth/react";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemeProvider } from "next-themes";
 
-export function Providers({ children }) {
+export async function Providers({ children, session }) {
   return (
-    <NextUIProvider>
-      {/* <NextThemeProvider themes={['light', 'dark']}>{children}</NextThemeProvider> */}
-      {children}
-    </NextUIProvider>
+    <SessionProvider session={session}>
+      <NextUIProvider>
+        {/* <NextThemeProvider themes={['light', 'dark']}>{children}</NextThemeProvider> */}
+        {children}
+      </NextUIProvider>
+    </SessionProvider>
   );
 }

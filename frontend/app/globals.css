@@ -36,7 +36,7 @@ h1 {
   line-height: 1.5;
 }
 
-.illustrate img svg{
+.illustrate img svg {
   color: #0a2243;
 }
 
@@ -44,8 +44,9 @@ p {
   line-height: 1.7;
 }
 
-.header{
+.layout {
+  display: grid;
+  grid-template-columns: 250px calc(100% - 250px);
+  min-height: 100vh;
   position: relative;
-  left: 250px;
-  width: calc(100% - 250px);
 }

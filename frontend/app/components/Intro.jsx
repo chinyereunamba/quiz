@@ -9,7 +9,7 @@ function Intro() {
       </h1>
       <p className="text-center font-normal md:text-xl lg:text-2xl min-w-unit-9 max-w-5xl">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque eveniet
-        minus fugiat at deleniti cumque inventore magni hic? Aperiam, dolores!
+        minus fugiat at deleniti cumque inventore magni hic? Aperiam, dolores
       </p>
       <Button size="lg" radius="sm" color="primary" className="font-semibold" as={Link} href="/login" variant="solid">
         Start Quiz Now

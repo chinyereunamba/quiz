@@ -1,9 +1,13 @@
+
+'use client'
 import { Input, Button, Link as link, User } from "@nextui-org/react";
 import React from "react";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
+import { signIn, useSession } from "next-auth/react";
 
 function Header() {
+  const { data: session, status } = useSession();
   return (
     <header className="flex px-4 py-3 header gap-10 justify-between bg-white">
       <div className="flex justify-center items-center w-3/4">
@@ -42,7 +46,7 @@ function Header() {
 
       <div className="flex gap-5 items-center w-fit">
         <User
-          name="Jane Doe"
+          name={session.user.email}
           description="Product Designer"
           avatarProps={{
             src: "https://i.pravatar.cc/150?u=a04258114e29026702d",

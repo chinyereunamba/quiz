@@ -23,12 +23,6 @@ module.exports = {
             foreground: "#0a2342",
           },
           focus: "#85BC9D",
-
-          'secondary': {
-            background: "#85bc9d",
-            DEFAULT: "#85bc9d",
-            foreground: "#0a2342"
-          }
         }
       }
     },

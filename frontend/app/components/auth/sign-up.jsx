@@ -101,7 +101,7 @@ function SignUpForm() {
       </form>
 
       <div className="flex w-full max-w-[600px] justify-between my-4 p-2">
-        <Link color="foreground" underline="hover" href="/login">
+        <Link color="foreground" underline="hover" href={"/login"}>
           Already have an account? Login
         </Link>
       </div>

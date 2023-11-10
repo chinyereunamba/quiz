@@ -2,11 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { AiOutlineSetting, AiOutlineFolder } from "react-icons/ai";
 import { BiSolidMapPin, BiLibrary } from "react-icons/bi";
-import style from './Layout.module.css'
 
 function Sidebar() {
   return (
-    <nav className={`w-[250px] flex flex-col gap-20 border-r-2 min-h-screen fixed ${style.sidebar}`}>
+    <nav color="primary" className={`w-[250px] flex flex-col gap-20 border-r-2 min-h-screen sidebar`}>
       <div className="py-3 px-5 text-lg font-semibold">Logo</div>
       <div className="">
         <ul className="flex flex-col">

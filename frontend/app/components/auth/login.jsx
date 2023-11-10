@@ -1,5 +1,8 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+import React, { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+
 import { Input, Link } from "@nextui-org/react";
 import { Button, Checkbox } from "@nextui-org/react";
 import { EyeFilledIcon } from "../utils/EyeFilledIcon";
@@ -7,26 +10,51 @@ import { EyeSlashFilledIcon } from "../utils/EyeSlashFilledIcon";
 
 function LoginForm() {
   const [isVisible, setIsVisible] = useState(false);
-
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  const router = useRouter();
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const data = {
+      email: email,
+      password: password,
+      redirect: true,
+      callbackUrl: "/dashboard",
+    };
+
+    signIn("credentials", data);
+  }
 
   return (
     <>
-      <form className="flex gap-6 flex-col max-w-[600px] w-full justify-center">
+      <form
+        className="flex gap-6 flex-col max-w-[600px] w-full justify-center"
+        onSubmit={handleSubmit}
+      >
         <div className="flex ">
           <Input
             type="email"
             label="Email"
+            name="email"
             isRequired
             variant="bordered"
             className="w-full"
+            ref={emailRef}
           />
         </div>
         <div className="flex">
           <Input
             label="Password"
             variant="bordered"
+            name="password"
             isRequired
+            ref={passwordRef}
             endContent={
               <button
                 className="focus:outline-none"
@@ -62,11 +90,14 @@ function LoginForm() {
         </div>
       </form>
 
-      <div className="flex flex-col gap-3 md:flex-row max-w-[600px] w-full justify-between my-4 p-2" color="foreground">
-        <Link color="foreground" underline="hover" href="/forgot-password">
+      <div
+        className="flex flex-col gap-3 md:flex-row max-w-[600px] w-full justify-between my-4 p-2"
+        color="foreground"
+      >
+        <Link color="foreground" underline="hover" href={"/forgot-password"}>
           Forgot password?
         </Link>
-        <Link color="foreground" underline="hover" href="/sign-up">
+        <Link color="foreground" underline="hover" href={"/sign-up"}>
           Don&apos;t have an account? Sign up
         </Link>
       </div>

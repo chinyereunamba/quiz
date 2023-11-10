@@ -52,7 +52,7 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden md:flex">
-          <Link href="./login" className="text-lg" color="foreground">
+          <Link href={"/login"} className="text-lg" color="foreground">
             Login
           </Link>
         </NavbarItem>
@@ -61,7 +61,7 @@ export default function App() {
             as={Link}
             className="font-medium"
             color="primary"
-            href="/sign-up"
+            href={"/sign-up"}
             variant="solid"
             radius="sm"
           >

@@ -20,7 +20,7 @@ function Footer() {
 
 
   return (
-    <footer color="secondary">
+    <footer>
       <div className="flex flex-wrap gap-20 md:gap-20 lg:justify-between lg:flex-row w-full lg:w-4/5 p-6">
         <div className="max-w-[400px]">
           <FooterTitle title={"Features"} />

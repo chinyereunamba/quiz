@@ -17,7 +17,7 @@ function SectionTwo() {
         knowledge and learn new things in a fun way.
       </p>
       <div className="my-10">
-        <h2 className="md:text-xl text-center font-semibold text-2xl" color={'secondary'}>Key Features</h2>
+        <h2 className="md:text-xl text-center font-semibold text-2xl">Key Features</h2>
         <div className="mt-8 flex gap-5 justify-center flex-wrap">
           {features.map((feature, index) => (
             <FeaturesCard key={index} title={feature.feature} img={feature.img} />
