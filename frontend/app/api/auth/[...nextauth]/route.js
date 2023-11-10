@@ -57,7 +57,6 @@ export const authOptions = {
                         data: credentials,
                     })
                     const data = response.data
-                    console.log(data)
                     if (data) return data
                 } catch (error) {
                     console.error(error)

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Input, Link } from "@nextui-org/react";
 import { Button, Checkbox } from "@nextui-org/react";
 import { EyeFilledIcon } from "../utils/EyeFilledIcon";
@@ -10,11 +10,44 @@ function SignUpForm() {
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const rePasswordRef = useRef();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const firstName = firstNameRef.current.value;
+    const lastName = lastNameRef.current.value;
+    const password = passwordRef.current.value;
+    const rePassword = rePasswordRef.current.value;
+
+    const data = {
+      email: email,
+      first_name: firstName,
+      last_name: lastName,
+      password1: password,
+      password2: rePassword,
+    };
+
+    const response = await fetch(`${process.env.NEXTAUTH_BACKEND_URL}/auth/`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+  }
+
   return (
     <>
       <form
         className="flex gap-6 flex-col w-full max-w-[600px]"
-        autoComplete="none"
+        autoComplete="off"
+        onSubmit={handleSubmit}
       >
         <div className="flex">
           <Input
@@ -23,6 +56,7 @@ function SignUpForm() {
             isRequired
             variant="bordered"
             className=" w-full"
+            ref={firstNameRef}
           />
         </div>
         <div className="flex ">
@@ -32,22 +66,28 @@ function SignUpForm() {
             isRequired
             variant="bordered"
             className=" w-full"
+            ref={lastNameRef}
           />
         </div>
         <div className="flex">
           <Input
             type="email"
             label="Email"
+            name="email"
             isRequired
             variant="bordered"
             className=" w-full"
+            ref={emailRef}
           />
         </div>
+
         <div className="flex">
           <Input
             label="Password"
             variant="bordered"
             isRequired
+            name="password"
+            ref={passwordRef}
             endContent={
               <button
                 className="focus:outline-none"
@@ -69,6 +109,8 @@ function SignUpForm() {
           <Input
             label="Re-enter password"
             variant="bordered"
+            name="re_password"
+            ref={rePasswordRef}
             isRequired
             endContent={
               <button

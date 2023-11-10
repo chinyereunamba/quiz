@@ -48,10 +48,13 @@ INSTALLED_APPS = [
     "base",
     "rest_framework",
     "rest_framework.authtoken",
-    'rest_framework_simplejwt', 
+    "rest_framework_simplejwt",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     "dj_rest_auth",
-
-    'corsheaders',
+    "dj_rest_auth.registration",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -66,6 +69,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "quiz.urls"
+
+SITE_ID = 1
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -118,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+    "AUTH_HEADER_TYPES": ("JWT",),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": False,
@@ -129,8 +134,8 @@ SIMPLE_JWT = {
 }
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
 
@@ -138,7 +143,9 @@ REST_FRAMEWORK = {
 REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_HTTPONLY": False,
-    "USER_DETAILS_SERIALIZER":"base.serializers.UserSerializer",
+    "USER_DETAILS_SERIALIZER": "base.serializers.UserSerializer",
+    "REGISTER_SERIALIZER": "base.serializers.CustomRegisterSerializer",
+    "LOGIN_SERIALIZER": "base.serializers.CustomLoginSerializer",
 }
 
 
@@ -167,3 +174,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Replicate AI with LLAMA 2
 AI_API = config("PALM_API_KEY")
+
+# Email service
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")

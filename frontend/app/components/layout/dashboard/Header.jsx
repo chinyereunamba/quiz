@@ -4,7 +4,7 @@ import { Input, Button, Link as link, User } from "@nextui-org/react";
 import React from "react";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, useSession, signOut } from "next-auth/react";
 
 function Header() {
   const { data: session, status } = useSession();
@@ -53,7 +53,9 @@ function Header() {
           }}
         />
         <div>
-          <Button as={link}>Logout</Button>
+          <Button onClick={() => signOut({ callbackUrl: "/login" })}>
+            Logout
+          </Button>
         </div>
       </div>
     </header>
