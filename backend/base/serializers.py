@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from dj_rest_auth.serializers import LoginSerializer
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -28,9 +27,3 @@ class CustomRegisterSerializer(RegisterSerializer):
             "password1": self.validated_data.get("password1", ""),
             "password2": self.validated_data.get("password2", ""),
         }
-
-
-class CustomLoginSerializer(LoginSerializer):
-    username = serializers.CharField(required=False)
-    email = serializers.EmailField()
-    password = serializers.CharField(style={"input_type": "password"})
