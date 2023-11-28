@@ -26,9 +26,7 @@ function Testimonial() {
   return (
     <Section>
       <Title title={"What users are saying"} />
-      <div className="flex gap-6 flex-wrap justify-center">
-        
-      </div>
+      <div className="flex gap-6 flex-wrap justify-center"></div>
     </Section>
   );
 }

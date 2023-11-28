@@ -1,8 +1,8 @@
 import React from "react";
-import Section from "../components/layout/Section";
-import Title from "../components/layout/Title";
+import Section from "@/components/layout/Section";
+import Title from "@/components/layout/Title";
 import { Link } from "@nextui-org/react";
-import SignUpForm from "../components/auth/sign-up";
+import SignUpForm from "@/components/auth/sign-up";
 
 function page() {
   return (

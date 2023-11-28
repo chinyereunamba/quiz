@@ -19,14 +19,19 @@ function SectionOne() {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed rem ab temporibus sit voluptas non.",
     },
-  ]
+  ];
 
   return (
     <Section>
       <Title title={"Popular Quiz Categories"} />
       <section className="categories flex flex-col gap-10 min-w-full ">
         {categories.map((item, index) => (
-          <Category key={index}  img={item.img} title={item.title} description={item.description}/>
+          <Category
+            key={index}
+            img={item.img}
+            title={item.title}
+            description={item.description}
+          />
         ))}
       </section>
     </Section>

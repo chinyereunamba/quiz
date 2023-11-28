@@ -1,5 +1,6 @@
 import React from "react";
-import Layout from "../components/layout/dashboard/Layout";
+import Layout from "@/components/dashboard/Layout";
+import Content from "@/components/dashboard/Content";
 
 export const metadata = {
   title: "Quiz App - Dashboard",
@@ -9,7 +10,9 @@ export const metadata = {
 function page() {
   return (
     <>
-      <Layout/>
+      <Layout>
+        <Content />
+      </Layout>
     </>
   );
 }

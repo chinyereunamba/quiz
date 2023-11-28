@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { AiOutlineSetting, AiOutlineFolder } from "react-icons/ai";
-import { BiSolidMapPin, BiLibrary } from "react-icons/bi";
+import { BiSolidMapPin, BiLibrary, BiFolder } from "react-icons/bi";
 
 function Sidebar() {
   return (
@@ -9,6 +9,11 @@ function Sidebar() {
       <div className="py-3 px-5 text-lg font-semibold">Logo</div>
       <div className="">
         <ul className="flex flex-col">
+          <li className="py-4 px-5 hover:bg-gray-300">
+            <Link href={"/create-quiz"} className="flex gap-2 items-center">
+              <BiFolder /> Create Quiz
+            </Link>
+          </li>
           <li className="py-4 px-5 hover:bg-gray-300">
             <Link href={"/"} className="flex gap-2 items-center">
               <BiSolidMapPin /> Explore

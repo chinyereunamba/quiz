@@ -3,13 +3,13 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import Content from "./Content";
 
-function Layout() {
+function Layout({children}) {
   return (
     <section className="layout">
       <Sidebar />
       <section className={`content`}>
         <Header />
-        <Content />
+        {children}
       </section>
     </section>
   );

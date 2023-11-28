@@ -2,7 +2,12 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
+from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework.viewsets import ModelViewSet
+from .serializers import *
 
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .models import *
 from .forms import *
@@ -124,3 +129,9 @@ def quiz(request, slug):
     context = {"quiz": quiz, "questions": question, "answers": answers, "dict": u}
 
     return render(request, "base/quiz.html", context)
+
+
+class QuizzesView(ModelViewSet):
+    serializer_class = QuizSerializer
+    queryset = Quiz.objects.all()
+    permission_classes = [IsAuthenticated]
