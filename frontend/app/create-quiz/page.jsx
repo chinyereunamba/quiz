@@ -1,12 +1,13 @@
-import React from 'react'
-import Layout from '@/components/layout/dashboard/Layout'
+import Layout from "@/components/dashboard/Layout";
+import Title from "@/components/layout/Title";
+import React from "react";
 
 function NewQuiz() {
-    return (
-      <Layout>
-          <div>NewQuiz</div>
-      </Layout>
-  )
+  return (
+    <Layout>
+      <Title title={"Create Quiz"} />
+    </Layout>
+  );
 }
 
-export default NewQuiz
+export default NewQuiz;
