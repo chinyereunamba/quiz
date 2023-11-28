@@ -1,4 +1,7 @@
 from django.urls import path
+
+from dj_rest_auth.urls import LoginView, LogoutView
+
 from .views import *
 
 

@@ -22,7 +22,7 @@ function LoginForm() {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const data = {
-      email: email,
+      username: email,
       password: password,
       redirect: true,
       callbackUrl: "/dashboard",

@@ -44,7 +44,7 @@ export const authOptions = {
         CredentialsProvider({
             name: "Credentials",
             credentials: {
-                email: { label: "Email", type: "email" },
+                username: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" },
             },
             // The data returned from this function is passed forward as the
