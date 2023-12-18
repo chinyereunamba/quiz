@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
-from .models import Quiz
+from .models import *
 
 User = get_user_model()
 
@@ -32,4 +32,15 @@ class CustomRegisterSerializer(RegisterSerializer):
 class QuizSerializer(ModelSerializer):
     class Meta:
         model = Quiz
+        fields = "__all__"
+
+class QuestionSerializer(ModelSerializer):
+    class Meta:
+        model = Question
+        fields = "__all__"
+
+
+class AnswerChoiceSerializer(ModelSerializer):
+    class Meta:
+        model = AnswerChoice
         fields = "__all__"

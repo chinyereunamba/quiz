@@ -3,7 +3,7 @@
 import re
 
 
-def parse_quiz_text(quiz_text):
+def parse_quiz_text(quiz_text:str) -> list:
     pattern = r"\*?\*?(\d+)\. (.+?)\*\*\s+ (.+?)\s+B\. (.+?)\s+C\. (.+?)\s+D\. (.+?)\s+The answer: ([A-D])\."
     matches = re.findall(pattern, quiz_text, re.DOTALL)
 

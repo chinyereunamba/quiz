@@ -1,6 +1,6 @@
 import google.generativeai as palm
 
-def get_questions(key: str, no: int, description: str):
+def get_questions(key: str, no: int, description: str)-> str:
     palm.configure(api_key=key)
     model = "models/text-bison-001"
 
