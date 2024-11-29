@@ -88,6 +88,9 @@ function LoginForm() {
             Login
           </Button>
         </div>
+        <div>
+          <Button onClick={()=>signIn('google')}>Login with Google</Button>
+        </div>
       </form>
 
       <div

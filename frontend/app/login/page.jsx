@@ -6,7 +6,7 @@ import { Link } from "@nextui-org/react";
 
 function page() {
   return (
-    <Section>
+    <main className="h-screen flex flex-col justify-center items-center">
       <Title title={"Login"} />
       <LoginForm />
       <p className=" font-normal mt-10 text-center">
@@ -16,7 +16,7 @@ function page() {
         </Link>
         . All rights reserved
       </p>
-    </Section>
+    </main>
   );
 }
 

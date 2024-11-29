@@ -10,9 +10,7 @@ function SignUpForm() {
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const usernameRef = useRef();
+  const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const rePasswordRef = useRef();
@@ -20,7 +18,7 @@ function SignUpForm() {
   async function handleSubmit(e) {
     e.preventDefault();
     const email = emailRef.current.value;
-    const firstName = firstNameRef.current.value;
+    const name = nameRef.current.value;
     const lastName = lastNameRef.current.value;
     const password = passwordRef.current.value;
     const rePassword = rePasswordRef.current.value;
@@ -52,21 +50,11 @@ function SignUpForm() {
         <div className="flex">
           <Input
             type="text"
-            label="First name"
+            label="Name"
             isRequired
             variant="bordered"
             className=" w-full"
-            ref={firstNameRef}
-          />
-        </div>
-        <div className="flex ">
-          <Input
-            type="text"
-            label="Last name"
-            isRequired
-            variant="bordered"
-            className=" w-full"
-            ref={lastNameRef}
+            ref={nameRef}
           />
         </div>
         <div className="flex">

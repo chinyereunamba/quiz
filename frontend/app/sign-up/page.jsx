@@ -1,12 +1,11 @@
 import React from "react";
-import Section from "@/components/layout/Section";
 import Title from "@/components/layout/Title";
 import { Link } from "@nextui-org/react";
 import SignUpForm from "@/components/auth/sign-up";
 
 function page() {
   return (
-    <Section>
+    <main className="h-screen flex flex-col justify-center items-center">
       <Title title={"Sign up"} />
       <SignUpForm />
       <p className=" font-normal mt-5 text-center">
@@ -16,7 +15,7 @@ function page() {
         </Link>
         . All rights reserved
       </p>
-    </Section>
+    </main>
   );
 }
 
