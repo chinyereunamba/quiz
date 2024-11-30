@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Poppins } from "next/font/google";
-import { Providers } from "./providers";
+import Providers  from "./providers";
 import { getServerSession } from "next-auth";
 
 const poppins = Poppins({

@@ -6,7 +6,7 @@ from .models import *
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ['email', 'username', 'password1', 'password2']
+        fields = ['email', 'name', 'password1', 'password2']
         widgets = {
             "password": forms.PasswordInput(),
         }

@@ -4,7 +4,7 @@ import Section from "@/components/layout/Section";
 import Title from "@/components/layout/Title";
 import { Link } from "@nextui-org/react";
 
-function page() {
+function Login() {
   return (
     <main className="h-screen flex flex-col justify-center items-center">
       <Title title={"Login"} />
@@ -20,4 +20,4 @@ function page() {
   );
 }
 
-export default page;
+export default Login;

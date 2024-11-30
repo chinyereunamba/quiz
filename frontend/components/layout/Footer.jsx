@@ -4,7 +4,6 @@ import FooterTitle from "./FooterTitle";
 import FooterLink from "./FooterLink";
 
 function Footer() {
-
   const support = [
     "F. A. Q",
     "Help and Support",
@@ -18,11 +17,10 @@ function Footer() {
 
   const social = ["Twitter", "LinkedIn", "GitHub"];
 
-
   return (
-    <footer>
-      <div className="flex flex-wrap gap-20 md:gap-20 lg:justify-between lg:flex-row w-full lg:w-4/5 p-6">
-        <div className="max-w-[400px]">
+    <footer className="max-w-7xl m-auto">
+      <div className="flex flex-col md:gap-20 md:justify-between flex-wrap lg:flex-row w-full lg:w-4/5 p-6">
+        <div className="">
           <FooterTitle title={"Features"} />
           <div>
             <ul>
@@ -32,7 +30,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="max-w-[400px]">
+        <div className="">
           <FooterTitle title={"About"} />
           <div>
             <ul>
@@ -42,7 +40,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="max-w-[400px]">
+        <div className="">
           <FooterTitle title={"Support"} />
           <div>
             <ul>
@@ -52,7 +50,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="max-w-[400px]">
+        <div className="">
           <FooterTitle title={"Follow us"} />
           <div>
             <ul>
@@ -64,11 +62,11 @@ function Footer() {
         </div>
       </div>
       <div className="flex flex-wrap items-center py-6 px-4 md:p-4 md:justify-between md:flex-row">
-        <p className=" font-normal">&copy; 2023 QuizApp. All rights reserved</p>
+        <p className=" font-normal">&copy; 2024 QuizApp. All rights reserved</p>
         <p className="font-normal">
           Designed by{" "}
           <Link
-            href="#"
+            href="https://chinyereunamba.vercel.app"
             about="Developer website"
             className="font-bold"
             target="_blank"

@@ -12,7 +12,7 @@ urlpatterns = [
     path("api/parse_view/", ParseQuizView.as_view()),
     path("quiz/<slug:slug>/", quiz, name="quiz"),
     path("register/", register, name="register"),
-    # path('login/', login_view, name='login'),
+    path("api/google-login/", GoogleLoginView.as_view(), name="google"),
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", logout_view, name="logout"),
 ]

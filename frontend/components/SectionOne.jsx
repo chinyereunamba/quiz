@@ -24,7 +24,7 @@ function SectionOne() {
   return (
     <Section>
       <Title title={"Popular Quiz Categories"} />
-      <section className="categories flex flex-col gap-10 min-w-full ">
+      <section className="categories flex flex-col gap-16 min-w-full ">
         {categories.map((item, index) => (
           <Category
             key={index}
