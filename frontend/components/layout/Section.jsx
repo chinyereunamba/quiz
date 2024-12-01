@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
 
-function Section(props) {
+function Section({ children }) {
   return (
-      <section className="p-6 my-12 flex flex-col items-center justify-center">{ props.children}</section>
-  )
+    <section className="py-20 px-4 max-w-7xl w-full m-auto">
+      {children}
+    </section>
+  );
 }
 
-export default Section
+export default Section;
+
+
+export const AuthSection = ({ children }) => {
+   return (
+     <section className="h-screen flex flex-col justify-center items-center">
+       {children}
+     </section>
+   );
+}

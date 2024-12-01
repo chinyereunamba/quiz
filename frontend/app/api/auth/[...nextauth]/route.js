@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import axios from "axios"
 
-// These two values should be a bit less than actual token lifetimes
 const BACKEND_ACCESS_TOKEN_LIFETIME = 45 * 60 // 45 minutes
 const BACKEND_REFRESH_TOKEN_LIFETIME = 6 * 24 * 60 * 60 // 6 days
 
@@ -15,22 +14,22 @@ const SIGN_IN_HANDLERS = {
     credentials: async (user, account, profile, email, credentials) => {
         return true
     },
-    // google: async (user, account, profile, email, credentials) => {
-    //     try {
-    //         const response = await axios({
-    //             method: "post",
-    //             url: process.env.NEXTAUTH_BACKEND_URL + "auth/google/",
-    //             data: {
-    //                 access_token: account["id_token"],
-    //             },
-    //         })
-    //         account["meta"] = response.data
-    //         return true
-    //     } catch (error) {
-    //         console.error(error)
-    //         return false
-    //     }
-    // },
+    google: async (user, account, profile, email, credentials) => {
+        try {
+            const response = await axios({
+                method: "post",
+                url: process.env.NEXTAUTH_BACKEND_URL + "auth/google/",
+                data: {
+                    access_token: account["id_token"],
+                },
+            })
+            account["meta"] = response.data
+            return true
+        } catch (error) {
+            console.error(error)
+            return false
+        }
+    },
 }
 const SIGN_IN_PROVIDERS = Object.keys(SIGN_IN_HANDLERS)
 
@@ -64,18 +63,18 @@ export const authOptions = {
                 return null
             },
         }),
-        // GoogleProvider({
-        //     clientId: process.env.CLIENT_ID ?? "",
-        //     clientSecret: process.env.CLIENT_SECRET ?? "",
-        //     authorization: {
-        //         params: {
-        //             prompt: "consent",
-        //             access_type: "offline",
-        //             response_type: "code"
-        //         }
-        //     }
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+            authorization: {
+                params: {
+                    prompt: "consent",
+                    access_type: "offline",
+                    response_type: "code"
+                }
+            }
 
-        // }),
+        }),
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
