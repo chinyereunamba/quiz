@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@nextui-org/react";
 import FooterTitle from "./FooterTitle";
 import FooterLink from "./FooterLink";
+import { year } from "@/constants";
 
 function Footer() {
   const support = [
@@ -64,7 +65,7 @@ function Footer() {
         </section>
         <div className="flex justify-between items-center mt-4 max-sm:flex-col max-sm:justify-start">
           <p className=" font-normal">
-            &copy; 2024 QuizApp. All rights reserved
+            &copy; {year} QuizApp. All rights reserved
           </p>
           <p className="font-normal">
             Designed by{" "}

@@ -3,6 +3,7 @@ import LoginForm from "@/components/auth/login";
 import { AuthSection } from "@/components/layout/Section";
 import Title from "@/components/layout/Title";
 import { Link } from "@nextui-org/react";
+import { year } from "@/constants";
 
 function page() {
   return (
@@ -11,7 +12,7 @@ function page() {
         <Title title={"Login"} />
         <LoginForm />
         <p className="font-normal max-w-md m-auto mt-10 text-center">
-          &copy; 2024{" "}
+          &copy; {year}{" "}
           <Link href="/" className="font-medium" color="foreground">
             QuizApp
           </Link>
