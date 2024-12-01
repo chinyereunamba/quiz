@@ -16,6 +16,7 @@ import {
   XIcon,
   MoonIcon,
   SunIcon,
+  LogOut
 } from "lucide-react";
 
 /**  @type {React.FC<any>} */
@@ -98,8 +99,8 @@ export function Sidebar() {
         </div>
       </div>
       <div
-        className={`mb-4 ${
-          isCollapsed ? "flex flex-col items-center gap-4 justify-center" : "px-4"
+        className={`mb-4 flex flex-col  gap-4 ${
+          isCollapsed ? " items-center justify-center" : "px-4"
         } transition-all duration-300 ease-in-out`}
       >
         <Switch
@@ -126,7 +127,7 @@ export function Sidebar() {
               isCollapsed ? "justify-center w-full" : ""
             }`}
           >
-            <BiLogOut size={24} />
+            <LogOut size={24} />
             {!isCollapsed && <span>Logout</span>}
           </Link>
         </Tooltip>
