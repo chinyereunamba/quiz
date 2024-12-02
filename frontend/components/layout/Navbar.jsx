@@ -10,7 +10,6 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  link,
 } from "@nextui-org/react";
 import { signIn, signOut, useSession } from "next-auth/react";
 
@@ -41,8 +40,7 @@ export default function App() {
           <p className="font-bold text-inherit text-lg uppercase">QuizApp</p>
         </NavbarBrand>
       </NavbarContent>
-
-      <NavbarContent justify="center" className="hidden md:flex">
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {menuItems.map((item, index) => (
           <NavbarItem key={index}>
             <Link href={item.link} color="foreground" className="text-lg">
@@ -56,33 +54,24 @@ export default function App() {
           <>
             <NavbarItem>{session?.user?.name}</NavbarItem>
             <NavbarItem>
-              <Button onClick={()=>signOut()}>Logout</Button>
+              <Button onClick={() => signOut()} color="primary" variant="flat">
+                Logout
+              </Button>
             </NavbarItem>
           </>
         ) : (
           <>
-            <NavbarItem className="hidden md:flex">
-              <Link href={"/login"} className="text-lg" color="foreground">
-                Login
-              </Link>
+            <NavbarItem className="hidden lg:flex">
+              <Link href="/login">Login</Link>
             </NavbarItem>
             <NavbarItem>
-              <Button
-                  // as={Link}
-                  onClick={()=>signIn("google")}
-                className="font-medium"
-                color="primary"
-                // href={"/sign-up"}
-                variant="solid"
-                radius="sm"
-              >
+              <Button as={Link} color="primary" href="/signup" variant="flat">
                 Sign Up
               </Button>
             </NavbarItem>
           </>
         )}
       </NavbarContent>
-
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>

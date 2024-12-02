@@ -13,7 +13,7 @@ function Login() {
         <LoginForm />
         <p className="font-normal max-w-md m-auto mt-10 text-center">
           &copy; {year}{" "}
-          <Link href="/" className="font-medium" color="foreground">
+          <Link href="/" className="font-bold" color="foreground">
             QuizApp
           </Link>
           . All rights reserved

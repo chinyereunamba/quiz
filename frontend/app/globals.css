@@ -44,9 +44,3 @@ p {
   line-height: 1.7;
 }
 
-.layout {
-  display: grid;
-  grid-template-columns: 250px calc(100% - 250px);
-  min-height: 100vh;
-  position: relative;
-}

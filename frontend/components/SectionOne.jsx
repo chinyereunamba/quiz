@@ -19,23 +19,31 @@ function SectionOne() {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed rem ab temporibus sit voluptas non.",
     },
+    {
+      img: "/general.jpg",
+      title: "General Knowledge",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed rem ab temporibus sit voluptas non.",
+    },
   ];
 
   return (
-    <Section>
-      <Title title={"Popular Quiz Categories"} />
-      <section className="categories flex flex-col gap-12 min-w-full ">
-        {categories.map((item, index) => (
-          <Category
-            key={index}
-            img={item.img}
-            title={item.title}
-            description={item.description}
-            className={`${index+1 % 2 == 0 && "flex-row-reverse"}`}
-          />
-        ))}
-      </section>
-    </Section>
+    <section className="py-20 px-4 bg-content1">
+      <div className="max-w-7xl mx-auto">
+        <Title title={"Popular Quiz Categories"} />
+        <div className="flex justify-center flex-wrap gap-6 max-sm:flex-col">
+          {categories.map((item, index) => (
+            <Category
+              key={index}
+              image={item.img}
+              title={item.title}
+              description={item.description}
+              className={`${index + (1 % 2) == 0 && "flex-row-reverse"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 

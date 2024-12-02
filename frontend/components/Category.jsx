@@ -1,26 +1,23 @@
 import React from "react";
-import { Image } from "@nextui-org/react";
+import { Card, CardBody, Image } from "@nextui-org/react";
 
-function Category({ img, title, description, className }) {
+function Category({ image, title, description, className }) {
   return (
-    <div className={`flex flex-col md:flex-row-reverse justify-center mt-4 ${className}`}>
-      <div className="img rounded-md justify-self-center">
+    <Card className="bg-content2 hover:bg-content3 transition-colors cursor-pointer max-w-sm">
+      <CardBody className="p-0">
         <Image
+          src={image}
+          alt={title}
           width={600}
           height={400}
-          src={img}
-          className="w-full"
-          alt={title}
-          isZoomed
+          className="w-full h-80 object-cover rounded-b-none"
         />
-      </div>
-      <div className="lg:p-6 category gap-6 lg:gap-10 lg:w-1/2">
-        <h1 className="mt-6 mb-2 text-xl md:mt-0 md:text-3xl font-semibold">
-          {title}
-        </h1>
-        <p className="md:text-xl">{description}</p>
-      </div>
-    </div>
+        <div className="p-6">
+          <h3 className="text-2xl font-semibold mb-2">{title}</h3>
+          <p>{description}</p>
+        </div>
+      </CardBody>
+    </Card>
   );
 }
 
