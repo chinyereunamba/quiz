@@ -5,7 +5,7 @@ import Title from "@/components/layout/Title";
 import { Link } from "@nextui-org/react";
 import { year } from "@/constants";
 
-function page() {
+function Login() {
   return (
     <AuthSection>
       <div className="w-full">
@@ -23,4 +23,4 @@ function page() {
   );
 }
 
-export default page;
+export default Login;

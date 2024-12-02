@@ -12,6 +12,7 @@ import {
   NavbarMenuItem,
   link,
 } from "@nextui-org/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,10 +24,10 @@ export default function App() {
     { name: "About", link: "/" },
   ];
 
+  const { data: session } = useSession();
 
   return (
     <Navbar
-      
       maxWidth="xl"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -51,35 +52,59 @@ export default function App() {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden md:flex">
-          <Link href={"/login"} className="text-lg" color="foreground">
-            Login
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            as={Link}
-            className="font-medium"
-            color="primary"
-            href={"/sign-up"}
-            variant="solid"
-            radius="sm"
-          >
-            Sign Up
-          </Button>
-        </NavbarItem>
+        {session ? (
+          <>
+            <NavbarItem>{session?.user?.name}</NavbarItem>
+            <NavbarItem>
+              <Button onClick={()=>signOut()}>Logout</Button>
+            </NavbarItem>
+          </>
+        ) : (
+          <>
+            <NavbarItem className="hidden md:flex">
+              <Link href={"/login"} className="text-lg" color="foreground">
+                Login
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Button
+                  // as={Link}
+                  onClick={()=>signIn("google")}
+                className="font-medium"
+                color="primary"
+                // href={"/sign-up"}
+                variant="solid"
+                radius="sm"
+              >
+                Sign Up
+              </Button>
+            </NavbarItem>
+          </>
+        )}
       </NavbarContent>
 
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full font-semibold" color={"foreground"} href={item.link} size="lg">
+            <Link
+              className="w-full font-semibold"
+              color={"foreground"}
+              href={item.link}
+              size="lg"
+            >
               {item.name}
             </Link>
           </NavbarMenuItem>
         ))}
         <NavbarMenuItem>
-          <Link className="w-full font-semibold" color="foreground" href="/login" size="lg">Login</Link>
+          <Link
+            className="w-full font-semibold"
+            color="foreground"
+            href="/login"
+            size="lg"
+          >
+            Login
+          </Link>
         </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>

@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import *
-from .forms import *
 
 # Register your models here.
 
@@ -9,13 +8,13 @@ from .forms import *
 class CustomUserAdmin(UserAdmin):
     list_display = [
         "email",
-        "username",
+        "name",
         "is_active",
         "is_superuser",
         "date_joined",
         "last_login",
     ]
-    search_fields = ["email", "username"]
+    search_fields = ["email", "name"]
     readonly_fields = ["id", "date_joined", "last_login"]
     filter_horizontal = ()
     list_filter = ("is_active", 'is_superuser')

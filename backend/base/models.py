@@ -13,36 +13,34 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, username, password, **extra_fields):
+    def create_user(self, email, name=None, password=None, **extra_fields):
         if not email:
             raise ValueError(_("Users must have an email address"))
 
-        email = self.normalize_email(email=email).lower()
-        user = self.model(email=email, username=username, **extra_fields)
+        email = self.normalize_email(
+            email=email,
+           
+        ).lower()
+        user = self.model(email=email, name=name, **extra_fields)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password, **extra_fields):
+    def create_superuser(self, email,name=None, password=None, **extra_fields):
+        extra_fields.setdefault("is_admin", True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
         user = self.create_user(
-            email=email, username=username, password=password, **extra_fields
+            email=email, name=name, password=password, **extra_fields
         )
-
-        user.is_admin = True
-        user.is_staff = True
-        user.is_superuser = True
-
-        user.save(using=self._db)
 
         return user
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), max_length=80, unique=True)
-    username = models.CharField(_("username"), max_length=40, unique=True, blank=True)
-    first_name = models.CharField(_("first name"), max_length=125, blank=True)
-    last_name = models.CharField(_("last name"), max_length=125, blank=True)
+    name = models.CharField(_("name"), max_length=40, unique=True, blank=True)
 
     date_joined = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     last_login = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -51,14 +49,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    is_google_account = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["name"]
 
     class Meta:
-        verbose_name = 'User'
+        verbose_name = "User"
         ordering = ["email"]
 
     def __str__(self) -> str:
@@ -69,6 +68,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def has_perm(self, obj=None):
         return self.is_admin
+
+
+class GoogleAccount(models.Model):
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, related_name="google_account"
+    )
+    google_id = models.CharField(max_length=255, unique=True)
+    profile_picture = models.URLField(blank=True, null=True)
 
 
 class Quiz(models.Model):
@@ -120,10 +127,10 @@ class AnswerChoice(models.Model):
     option_3 = models.CharField(max_length=500)
     option_4 = models.CharField(max_length=500)
     ANSWER_CHOICES = [
-        ('A', 'A'),
-        ('B', 'B'),
-        ('C', 'C'),
-        ('D', 'D'),
+        ("A", "A"),
+        ("B", "B"),
+        ("C", "C"),
+        ("D", "D"),
     ]
     correct_answer = models.CharField(
         choices=ANSWER_CHOICES, max_length=125, blank=True

@@ -1,3 +1,6 @@
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.exceptions import ValidationError
+from rest_framework.views import APIView
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -115,7 +118,8 @@ def parse_quiz_view(request):
         if serializer.is_valid():
             title = serializer.validated_data.get("title")
             description = serializer.validated_data.get("description")
-            number_of_questions = serializer.validated_data.get("number_of_questions")
+            number_of_questions = serializer.validated_data.get(
+                "number_of_questions")
             duration = serializer.validated_data.get("duration")
 
             quiz = Quiz.objects.create(
@@ -136,7 +140,8 @@ def parse_quiz_view(request):
 
             for question_data in questions_data:
                 question_serializer = QuestionSerializer(
-                    data={"quiz": quiz.id, "question": question_data["question_text"]}
+                    data={"quiz": quiz.id,
+                          "question": question_data["question_text"]}
                 )
                 if question_serializer.is_valid():
                     question = question_serializer.save()
@@ -174,7 +179,8 @@ class ParseQuizView(CreateAPIView):
 
         title = serializer.validated_data.get("title")
         description = serializer.validated_data.get("description")
-        number_of_questions = serializer.validated_data.get("number_of_questions")
+        number_of_questions = serializer.validated_data.get(
+            "number_of_questions")
         duration = serializer.validated_data.get("duration")
 
         quiz = Quiz.objects.create(
@@ -195,7 +201,8 @@ class ParseQuizView(CreateAPIView):
 
         for question_data in questions_data:
             question_serializer = QuestionSerializer(
-                data={"quiz": quiz.id, "question": question_data["question_text"]}
+                data={"quiz": quiz.id,
+                      "question": question_data["question_text"]}
             )
             question_serializer.is_valid(raise_exception=True)
             question = question_serializer.save()
@@ -244,7 +251,8 @@ def quiz(request, slug):
             }
         )
 
-    context = {"quiz": quiz, "questions": question, "answers": answers, "dict": u}
+    context = {"quiz": quiz, "questions": question,
+               "answers": answers, "dict": u}
 
     return render(request, "base/quiz.html", context)
 
@@ -253,3 +261,44 @@ class QuizzesView(ModelViewSet):
     serializer_class = QuizSerializer
     queryset = Quiz.objects.all()
     permission_classes = [IsAuthenticated]
+
+
+class GoogleLoginView(APIView):
+    def post(self, request):
+        # Extract Google user info
+        google_id = request.data.get("google_id")
+        email = request.data.get("email")
+        name = request.data.get("name")
+        profile_picture = request.data.get("profile_picture")
+
+        if not google_id or not email:
+            raise ValidationError("Missing Google ID or email")
+
+        # Check if user exists
+        user, created = CustomUser.objects.get_or_create(email=email)
+        if created:
+            user.name = email.split("@")[0]
+            user.is_google_account = True
+            user.save()
+
+        # Link Google Account
+        GoogleAccount.objects.get_or_create(
+            user=user,
+            google_id=google_id,
+            defaults={"profile_picture": profile_picture},
+        )
+
+        # Generate tokens
+        refresh = RefreshToken.for_user(user)
+        return Response(
+            {
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+                "user": {
+                    "email": user.email,
+                    "name":user.name,
+                    "is_google_account": user.is_google_account,
+                    'is_superuser': user.is_superuser
+                },
+            }
+        )

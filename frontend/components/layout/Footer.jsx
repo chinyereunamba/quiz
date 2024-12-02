@@ -22,6 +22,7 @@ function Footer() {
     <footer>
       <div className="max-w-7xl m-auto px-4 py-6">
         <section className="flex justify-between max-md:flex-col gap-6">
+
           <div>
             <FooterTitle title={"Features"} />
             <div>

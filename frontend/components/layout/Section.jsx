@@ -10,7 +10,6 @@ function Section({ children }) {
 
 export default Section;
 
-
 export const AuthSection = ({ children }) => {
    return (
      <section className="h-screen flex flex-col justify-center items-center">

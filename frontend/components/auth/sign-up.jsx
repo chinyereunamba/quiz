@@ -80,6 +80,7 @@ function SignUpForm() {
         ]}
       />
       <div className="flex w-full max-w-md justify-between my-4 py-2 m-auto">
+
         <Link color="foreground" underline="hover" href={"/login"}>
           Already have an account? Login
         </Link>

@@ -6,7 +6,7 @@ function Category({ img, title, description, className }) {
     <div className={`flex flex-col md:flex-row-reverse justify-center mt-4 ${className}`}>
       <div className="img rounded-md justify-self-center">
         <Image
-          width={500}
+          width={600}
           height={400}
           src={img}
           className="w-full"

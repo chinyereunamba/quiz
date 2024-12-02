@@ -146,6 +146,7 @@ REST_AUTH = {
     "JWT_AUTH_HTTPONLY": False,
     "USER_DETAILS_SERIALIZER": "api.serializers.UserSerializer",
     "REGISTER_SERIALIZER": "api.serializers.CustomRegisterSerializer",
+    # "LOGIN_SERIALIZER":"api.serializers.CustomLoginSerializer"
 }
 
 
@@ -182,3 +183,10 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = "email"
+ACCOUNT_AUTHENTICATED_METHOD = "email"
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
