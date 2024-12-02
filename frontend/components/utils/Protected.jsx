@@ -5,7 +5,14 @@ import Image from "next/image";
 import { BiLogOut } from "react-icons/bi";
 import React, { useState } from "react";
 import { useTheme } from "next-themes";
-import { Button, Switch, Link, Card, Tooltip } from "@nextui-org/react";
+import {
+  Button,
+  Switch,
+  Link,
+  Card,
+  Tooltip,
+  Divider,
+} from "@nextui-org/react";
 
 import {
   HomeIcon,
@@ -16,11 +23,16 @@ import {
   XIcon,
   MoonIcon,
   SunIcon,
-  LogOut
+  LogOut,
+  Book,
+  Search,
+  Bell,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
-/**  @type {React.FC<any>} */
+/**  @type {React.FC<React.ReactNode>} */
 export const Protected = ({ children }) => {
+  const path = usePathname().split("/")[1];
   // const { data: session, status } = useSession();
 
   // if (status === "loading") {
@@ -30,22 +42,24 @@ export const Protected = ({ children }) => {
   //   return redirect("/login");
   // }
 
-  const navLinks = [
-    { name: "Dashboard", link: "dashboard" },
-    { name: "Collections", link: "collections" },
-    { name: "Quizzes", link: "quizzes" },
-    { name: "Collections", link: "collections" },
-    { name: "Settings", link: "settings" },
-  ];
   return (
     <div className="flex transition-[width]">
       <Sidebar />
-      <main className="flex-1 p-4">
-        {children}
+      <main className="flex-1">
+        <Header name={path} />
+        <section className="p-8">{children}</section>
       </main>
     </div>
   );
 };
+
+const navLinks = [
+  { name: "Dashboard", href: "/dashboard", icon: ChartBarIcon },
+  { name: "Collections", link: "collections", icon: HomeIcon },
+  { name: "Quizzes", link: "quizzes", icon: HomeIcon },
+  { name: "Collections", link: "collections", icon: Book },
+  { name: "Settings", href: "/settings", icon: CogIcon },
+];
 
 const menuItems = [
   { name: "Home", icon: HomeIcon, href: "/" },
@@ -61,7 +75,7 @@ export function Sidebar() {
 
   return (
     <Card
-      className={`h-screen flex flex-col justify-between ${
+      className={`h-screen flex flex-col justify-between rounded-none ${
         isCollapsed ? "w-20" : "w-64"
       } transition-[width] duration-300 ease-in-out`}
     >
@@ -74,12 +88,19 @@ export function Sidebar() {
         >
           {isCollapsed ? <MenuIcon size={20} /> : <XIcon size={20} />}
         </Button>
+
+        <div className="flex-1 rounded-md bg-secondary p-2 mx-4 flex gap-4 items-center">
+          <span className="h-12 w-12 bg-white grid place-items-center rounded-full">
+            <UserIcon size={24}/>
+          </span>
+          <p className="font-bold text-background">Chinyere</p>
+        </div>
         <div
           className={`flex flex-col gap-4 mt-4 ${
             isCollapsed ? "items-center" : "items-start px-4"
           } transition-all duration-300 ease-in-out`}
         >
-          {menuItems.map((item) => (
+          {navLinks.map((item) => (
             <Tooltip
               key={item.name}
               content={isCollapsed ? item.name : null}
@@ -123,7 +144,7 @@ export function Sidebar() {
         >
           <Link
             href={"logout"}
-            className={`flex items-center gap-2 text-current ${
+            className={`flex cursor-pointer items-center gap-2 text-current ${
               isCollapsed ? "justify-center w-full" : ""
             }`}
           >
@@ -136,4 +157,17 @@ export function Sidebar() {
   );
 }
 
-export default Protected
+export default Protected;
+
+export function Header({ name }) {
+  return (
+    <header className="px-8 py-4 border-b flex justify-between">
+      <h3 className="capitalize text-xl font-bold">{name}</h3>
+
+      <div className="flex gap-2 items-center">
+        <Search />
+        <Bell />
+      </div>
+    </header>
+  );
+}
