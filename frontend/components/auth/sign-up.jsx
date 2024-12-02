@@ -4,133 +4,83 @@ import { Input, Link } from "@nextui-org/react";
 import { Button, Checkbox } from "@nextui-org/react";
 import { EyeFilledIcon } from "../utils/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../utils/EyeSlashFilledIcon";
+import AuthForm from "../utils/AuthForm";
 
 function SignUpForm() {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
-
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const rePasswordRef = useRef();
+  const [user, setUser] = useState({
+    email: "",
+    name: "",
+    password: "",
+    rePassword: "",
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const email = emailRef.current.value;
-    const name = nameRef.current.value;
-    const lastName = lastNameRef.current.value;
-    const password = passwordRef.current.value;
-    const rePassword = rePasswordRef.current.value;
-
     const data = {
       email: email,
-      first_name: firstName,
-      last_name: lastName,
-      password1: password,
-      password2: rePassword,
+      name: user.name,
+      password1: user.password,
+      password2: user.password,
     };
 
     const response = await fetch(`${process.env.NEXTAUTH_BACKEND_URL}/auth/`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
     });
   }
 
   return (
     <>
-      <form
-        className="flex gap-6 flex-col w-full max-w-[600px]"
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex">
-          <Input
-            type="text"
-            label="Name"
-            isRequired
-            variant="bordered"
-            className=" w-full"
-            ref={nameRef}
-          />
-        </div>
-        <div className="flex">
-          <Input
-            type="email"
-            label="Email"
-            name="email"
-            isRequired
-            variant="bordered"
-            className=" w-full"
-            ref={emailRef}
-          />
-        </div>
+      <AuthForm
+        btn={"Register"}
+        handleSubmit={handleSubmit}
+        inputList={[
+          {
+            label: "Email",
+            placeholder: "johndoe@gmail.com",
+            name: "email",
+            value: user.email,
+            handleChange(e) {
+              setUser({ ...user, email: e.target.value });
+            },
+          },
+          {
+            label: "Name",
+            placeholder: "John Doe",
+            name: "name",
+            value: user.email,
+            handleChange(e) {
+              setUser({ ...user, name: e.target.value });
+            },
+          },
+          {
+            label: "Password",
+            placeholder: "**********",
+            name: "password",
+            value: user.password,
+            handleChange(e) {
+              setUser({ ...user, password: e.target.value });
+            },
+          },
+          {
+            label: "Re-enter password",
+            placeholder: "**********",
+            name: "rePassword",
+            value: user.rePassword,
+            handleChange(e) {
+              setUser({ ...user, rePassword: e.target.value });
+            },
+          },
+        ]}
+      />
+      <div className="flex w-full max-w-md justify-between my-4 py-2 m-auto">
 
-        <div className="flex">
-          <Input
-            label="Password"
-            variant="bordered"
-            isRequired
-            name="password"
-            ref={passwordRef}
-            endContent={
-              <button
-                className="focus:outline-none"
-                type="button"
-                onClick={toggleVisibility}
-              >
-                {isVisible ? (
-                  <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                ) : (
-                  <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                )}
-              </button>
-            }
-            type={isVisible ? "text" : "password"}
-            className=" w-full"
-          />
-        </div>
-        <div className="flex">
-          <Input
-            label="Re-enter password"
-            variant="bordered"
-            name="re_password"
-            ref={rePasswordRef}
-            isRequired
-            endContent={
-              <button
-                className="focus:outline-none"
-                type="button"
-                onClick={toggleVisibility}
-              >
-                {isVisible ? (
-                  <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                ) : (
-                  <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-                )}
-              </button>
-            }
-            type={isVisible ? "text" : "password"}
-            className="w-full"
-          />
-        </div>
-        <div className="flex">
-          <Button
-            color="primary"
-            type="submit"
-            radius="sm"
-            size="lg"
-            className="w-full font-semibold"
-          >
-            Sign up
-          </Button>
-        </div>
-      </form>
-
-      <div className="flex w-full max-w-[600px] justify-between my-4 p-2">
         <Link color="foreground" underline="hover" href={"/login"}>
           Already have an account? Login
         </Link>

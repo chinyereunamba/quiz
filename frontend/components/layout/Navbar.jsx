@@ -28,7 +28,6 @@ export default function App() {
 
   return (
     <Navbar
-      shouldHideOnScroll
       maxWidth="xl"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}

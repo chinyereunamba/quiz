@@ -17,7 +17,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   const session = await getServerSession();
   return (
-    <html lang="en" className={poppins.className}>
+    <html lang="en">
       <body>
         <Providers session={session}>{children}</Providers>
       </body>
