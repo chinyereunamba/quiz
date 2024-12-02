@@ -11,7 +11,6 @@ import {
   Link,
   Card,
   Tooltip,
-  Divider,
 } from "@nextui-org/react";
 
 import {
@@ -27,6 +26,7 @@ import {
   Book,
   Search,
   Bell,
+  SettingsIcon,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -58,14 +58,14 @@ const navLinks = [
   { name: "Collections", link: "collections", icon: HomeIcon },
   { name: "Quizzes", link: "quizzes", icon: HomeIcon },
   { name: "Collections", link: "collections", icon: Book },
-  { name: "Settings", href: "/settings", icon: CogIcon },
+  { name: "Settings", href: "/settings", icon: SettingsIcon },
 ];
 
 const menuItems = [
   { name: "Home", icon: HomeIcon, href: "/" },
   { name: "Profile", icon: UserIcon, href: "/profile" },
   { name: "Dashboard", icon: ChartBarIcon, href: "/dashboard" },
-  { name: "Settings", icon: CogIcon, href: "/settings" },
+  { name: "Settings", icon: SettingsIcon, href: "/settings" },
 ];
 
 /**  @type {React.FC} */
@@ -75,7 +75,7 @@ export function Sidebar() {
 
   return (
     <Card
-      className={`h-screen flex flex-col justify-between rounded-none ${
+      className={`h-screen flex flex-col justify-between rounded-none shadow-none ${
         isCollapsed ? "w-20" : "w-64"
       } transition-[width] duration-300 ease-in-out`}
     >
