@@ -9,7 +9,7 @@ coverage==7.3.2
 cryptography==41.0.5
 defusedxml==0.8.0rc2
 dj-rest-auth==4.0.0
-Django==4.2.6
+Django==4.2.16
 django-allauth==0.52.0
 django-cors-headers==4.3.0
 django-templated-mail==1.1.1
