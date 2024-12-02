@@ -14,7 +14,16 @@ import {
   Button,
   Divider,
 } from "@nextui-org/react";
-import { Bell, Lock, User, Globe, Eye, Moon, Volume2 } from "lucide-react";
+import {
+  Bell,
+  Lock,
+  User,
+  Globe,
+  Eye,
+  Moon,
+  Volume2,
+  EyeClosed,
+} from "lucide-react";
 
 export default function Settings() {
   const [notifications, setNotifications] = useState({
@@ -22,6 +31,9 @@ export default function Settings() {
     push: false,
     updates: true,
   });
+
+  const [showCurrentP, setShowCurrentP] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const languages = [
     { label: "English", value: "en" },
@@ -32,49 +44,42 @@ export default function Settings() {
 
   return (
     <Protected>
-      <div className="p-8 max-w-4xl mx-auto space-y-6">
-        <h1 className="text-4xl font-bold mb-6">Settings</h1>
-
+      <div className="max-w-4xl space-y-6">
         {/* Profile Settings */}
-        <Card>
-          <CardHeader className="flex gap-3">
-            <User className="w-6 h-6" />
+        <div>
+          <div className="flex gap-3 items-center pb-2">
+            <span>
+              <User className="w-6 h-6" />
+            </span>
             <div className="flex flex-col">
-              <p className="text-md">Profile Settings</p>
+              <p className="text-md font-bold">Profile Settings</p>
               <p className="text-small text-default-500">
                 Manage your profile information
               </p>
             </div>
-          </CardHeader>
-          <CardBody className="space-y-4">
-            <Input
-              label="Display Name"
-              placeholder="Enter your display name"
-              defaultValue="John Doe"
-            />
-            <Input
-              label="Email"
-              placeholder="Enter your email"
-              type="email"
-              defaultValue="john@example.com"
-            />
-            <Button color="primary">Update Profile</Button>
-          </CardBody>
-        </Card>
+          </div>
+          <div className="my-4 flex flex-col gap-4">
+            <Input type="text" label="Display Name" />
+            <Input label="Email" type="email" />
+            <Button color="primary" className="w-fit rounded-md">
+              Update Profile
+            </Button>
+          </div>
+        </div>
 
         {/* Notification Settings */}
-        <Card>
-          <CardHeader className="flex gap-3">
+        <div>
+          <div className="flex items-center gap-3 pb-2">
             <Bell className="w-6 h-6" />
             <div className="flex flex-col">
-              <p className="text-md">Notification Settings</p>
+              <p className="text-md  font-bold">Notification Settings</p>
               <p className="text-small text-default-500">
                 Control how you receive notifications
               </p>
             </div>
-          </CardHeader>
-          <CardBody className="space-y-4">
-            <div className="flex justify-between items-center">
+          </div>
+          <div className="">
+            <div className="flex justify-between items-center py-2">
               <div>
                 <p className="text-md">Email Notifications</p>
                 <p className="text-small text-default-500">
@@ -89,7 +94,7 @@ export default function Settings() {
               />
             </div>
             <Divider />
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center py-2">
               <div>
                 <p className="text-md">Push Notifications</p>
                 <p className="text-small text-default-500">
@@ -104,7 +109,7 @@ export default function Settings() {
               />
             </div>
             <Divider />
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center py-2">
               <div>
                 <p className="text-md">Product Updates</p>
                 <p className="text-small text-default-500">
@@ -118,22 +123,22 @@ export default function Settings() {
                 }
               />
             </div>
-          </CardBody>
-        </Card>
+          </div>
+        </div>
 
         {/* Appearance Settings */}
-        <Card>
-          <CardHeader className="flex gap-3">
+        <div className="my-2">
+          <div className="flex gap-3 items-center pb-2">
             <Eye className="w-6 h-6" />
             <div className="flex flex-col">
-              <p className="text-md">Appearance</p>
+              <p className="text-md font-bold">Appearance</p>
               <p className="text-small text-default-500">
                 Customize your quiz experience
               </p>
             </div>
-          </CardHeader>
-          <CardBody className="space-y-4">
-            <div className="flex justify-between items-center">
+          </div>
+          <div className="">
+            <div className="flex justify-between items-center py-2">
               <div>
                 <p className="text-md">Dark Mode</p>
                 <p className="text-small text-default-500">
@@ -143,7 +148,7 @@ export default function Settings() {
               <Switch icon={<Moon className="w-4 h-4" />} />
             </div>
             <Divider />
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center py-2">
               <div>
                 <p className="text-md">Sound Effects</p>
                 <p className="text-small text-default-500">
@@ -152,21 +157,21 @@ export default function Settings() {
               </div>
               <Switch icon={<Volume2 className="w-4 h-4" />} defaultSelected />
             </div>
-          </CardBody>
-        </Card>
+          </div>
+        </div>
 
         {/* Language & Region */}
-        <Card>
-          <CardHeader className="flex gap-3">
+        <div>
+          <div className="flex gap-3 items-center pb-2">
             <Globe className="w-6 h-6" />
             <div className="flex flex-col">
-              <p className="text-md">Language & Region</p>
+              <p className="text-md  font-bold">Language & Region</p>
               <p className="text-small text-default-500">
                 Set your preferred language
               </p>
             </div>
-          </CardHeader>
-          <CardBody>
+          </div>
+          <div className="py-2">
             <Select label="Select Language" defaultSelectedKeys={["en"]}>
               {languages.map((lang) => (
                 <SelectItem key={lang.value} value={lang.value}>
@@ -174,39 +179,60 @@ export default function Settings() {
                 </SelectItem>
               ))}
             </Select>
-          </CardBody>
-        </Card>
+          </div>
+        </div>
 
         {/* Security Settings */}
-        <Card>
-          <CardHeader className="flex gap-3">
+        <div>
+          <div className="flex gap-3 items-center pb-2">
             <Lock className="w-6 h-6" />
             <div className="flex flex-col">
-              <p className="text-md">Security</p>
+              <p className="text-md  font-bold">Security</p>
               <p className="text-small text-default-500">
                 Manage your account security
               </p>
             </div>
-          </CardHeader>
-          <CardBody className="space-y-4">
+          </div>
+          <div className="space-y-4 mt-3">
             <Input
               label="Current Password"
-              type="password"
-              placeholder="Enter current password"
+              type={showCurrentP ? "text" : "password"}
+              endContent={
+                <span
+                  className="cursor-pointer"
+                  onClick={() => setShowCurrentP(!showCurrentP)}
+                >
+                  {showCurrentP ? <Eye /> : <EyeClosed />}
+                </span>
+              }
             />
             <Input
               label="New Password"
-              type="password"
-              placeholder="Enter new password"
+              type={showPassword ? "text" : "password"}
+              endContent={
+                <span
+                  className="cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <Eye /> : <EyeClosed />}
+                </span>
+              }
             />
             <Input
               label="Confirm New Password"
-              type="password"
-              placeholder="Confirm new password"
+              type={showPassword ? "text" : "password"}
+              endContent={
+                <span
+                  className="cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <Eye /> : <EyeClosed />}
+                </span>
+              }
             />
-            <Button color="primary">Change Password</Button>
-          </CardBody>
-        </Card>
+            <Button color="primary" className="rounded-md">Change Password</Button>
+          </div>
+        </div>
       </div>
     </Protected>
   );

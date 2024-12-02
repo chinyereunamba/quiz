@@ -1,7 +1,7 @@
 import React from "react";
 import { Protected } from "@/components/utils/Protected";
 import DashboardIntro from "@/components/dashboard/DashboardIntro";
-import { Button, Card, CardBody } from "@nextui-org/react";
+import { Button, Card, CardBody, Link } from "@nextui-org/react";
 import { PlusIcon } from "lucide-react";
 
 function page() {
@@ -9,7 +9,7 @@ function page() {
     <Protected>
       <div className="flex justify-between">
         <h2 className="text-2xl font-bold pb-6">Hi, Welcome back</h2>
-        <Button color="primary" className="rounded-md font-bold" endContent={<PlusIcon />}>
+        <Button as={Link} href="/create-quiz" color="primary" className="rounded-md font-bold" endContent={<PlusIcon />}>
           Create new quiz
         </Button>
       </div>

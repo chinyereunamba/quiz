@@ -6,7 +6,6 @@ import React from "react";
 function NewQuiz() {
   return (
     <Protected>
-      <Title title={"Create Quiz"} />
       <CreateQuizForm />
     </Protected>
   );
