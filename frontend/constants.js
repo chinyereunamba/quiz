@@ -1,5 +1,5 @@
 const date = new Date()
 const year = date.getFullYear()
-console.log(date.getFullYear())
+const siteName = ''
 
 export {year}
