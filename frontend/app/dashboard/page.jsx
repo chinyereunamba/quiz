@@ -9,7 +9,7 @@ function page() {
     <Protected>
       <div className="flex justify-between">
         <h2 className="text-2xl font-bold pb-6">Hi, Welcome back</h2>
-        <Button color="primary" className="rounded-md" endContent={<PlusIcon />}>
+        <Button color="primary" className="rounded-md font-bold" endContent={<PlusIcon />}>
           Create new quiz
         </Button>
       </div>

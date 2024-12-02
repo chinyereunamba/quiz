@@ -61,13 +61,6 @@ const navLinks = [
   { name: "Settings", href: "/settings", icon: SettingsIcon },
 ];
 
-const menuItems = [
-  { name: "Home", icon: HomeIcon, href: "/" },
-  { name: "Profile", icon: UserIcon, href: "/profile" },
-  { name: "Dashboard", icon: ChartBarIcon, href: "/dashboard" },
-  { name: "Settings", icon: SettingsIcon, href: "/settings" },
-];
-
 /**  @type {React.FC} */
 export function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -89,7 +82,7 @@ export function Sidebar() {
           {isCollapsed ? <MenuIcon size={20} /> : <XIcon size={20} />}
         </Button>
 
-        <div className="flex-1 rounded-md bg-secondary p-2 mx-4 flex gap-4 items-center">
+        <div className="flex-1 rounded-md bg-primary p-2 mx-4 flex gap-4 items-center">
           <span className="h-12 w-12 bg-white grid place-items-center rounded-full">
             <UserIcon size={24}/>
           </span>
