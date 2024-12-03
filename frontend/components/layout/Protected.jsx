@@ -53,7 +53,7 @@ export const Protected = ({ children }) => {
 const navLinks = [
   { name: "Dashboard", href: "/dashboard", icon: ChartBarIcon },
   { name: "Collections", link: "collections", icon: HomeIcon },
-  { name: "Quizzes", link: "quizzes", icon: BookOpenIcon },
+  { name: "Quizzes", href: "quizzes", icon: BookOpenIcon },
   { name: "Leaderboard", link: "leaderboard", icon: TrophyIcon },
   { name: "Settings", href: "/settings", icon: SettingsIcon },
 ];

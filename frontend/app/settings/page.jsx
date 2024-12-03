@@ -1,5 +1,5 @@
 "use client";
-import Protected from "@/components/utils/Protected";
+import Protected from "@/components/layout/Protected";
 import React from "react";
 
 import { useState } from "react";
@@ -230,7 +230,9 @@ export default function Settings() {
                 </span>
               }
             />
-            <Button color="primary" className="rounded-md">Change Password</Button>
+            <Button color="primary" className="rounded-md">
+              Change Password
+            </Button>
           </div>
         </div>
       </div>
