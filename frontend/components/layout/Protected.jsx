@@ -53,15 +53,18 @@ export const Protected = ({ children }) => {
 const navLinks = [
   { name: "Dashboard", href: "/dashboard", icon: ChartBarIcon },
   { name: "Collections", link: "collections", icon: HomeIcon },
-  { name: "Quizzes", href: "quizzes", icon: BookOpenIcon },
+  { name: "Quizzes", href: "/quizzes", icon: BookOpenIcon },
   { name: "Leaderboard", link: "leaderboard", icon: TrophyIcon },
   { name: "Settings", href: "/settings", icon: SettingsIcon },
 ];
 
 /**  @type {React.FC} */
 export function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useLocalStorage("collapsed", null);
+  const [isCollapsed, setIsCollapsed] = useState(false)
   const { theme, setTheme } = useTheme();
+  const path = usePathname();
+
+  
 
   return (
     <Card
@@ -75,7 +78,7 @@ export function Sidebar() {
         } transition-[width] duration-300 ease-in-out h-screen`}
       >
         <div>
-          <div
+          <header
             className={`flex gap-2 items-center flex-1 w-full ${
               isCollapsed ? "justify-center" : ""
             }`}
@@ -88,8 +91,8 @@ export function Sidebar() {
             >
               <MenuIcon size={20} />
             </Button>
-            {!isCollapsed ? <h3 className="text-xl font-bold">Quizapp</h3>:''}
-          </div>
+            {!isCollapsed ? <p className="text-xl font-bold">Quizapp</p> : ""}
+          </header>
 
           <div className="flex-1 rounded-md bg-primary p-2 mx-2 flex gap-4 items-center transition-all">
             {isCollapsed ? (
@@ -115,7 +118,9 @@ export function Sidebar() {
                 <Tooltip key={item.name} content={item.name} placement="right">
                   <Link
                     href={item.href}
-                    className="flex items-center gap-2 text-current justify-center p-3 hover:bg-secondary rounded-md"
+                    className={`flex items-center gap-2 text-current justify-center p-3 hover:bg-secondary rounded-md ${
+                      path == item.href ? "bg-secondary" : ""
+                    }`}
                   >
                     <item.icon size={24} />
                   </Link>
@@ -124,7 +129,9 @@ export function Sidebar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center gap-2 text-current hover:bg-secondary w-full p-3 rounded-md"
+                  className={`flex items-center gap-2 text-current hover:bg-secondary w-full p-3 rounded-md ${
+                    path == item.href ? "bg-secondary" : ""
+                  }`}
                 >
                   <item.icon size={24} />
                   <span>{item.name}</span>
