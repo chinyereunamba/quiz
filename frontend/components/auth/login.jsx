@@ -7,7 +7,7 @@ import { Input, Link } from "@nextui-org/react";
 import { Button, Checkbox } from "@nextui-org/react";
 import { EyeFilledIcon } from "../utils/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../utils/EyeSlashFilledIcon";
-import AuthForm from "../utils/AuthForm";
+import AuthForm from "./AuthForm";
 
 function LoginForm() {
   const [isVisible, setIsVisible] = useState(false);
@@ -56,13 +56,11 @@ function LoginForm() {
           },
         ]}
       />
-      <div
-        className="flex flex-col gap-3 md:flex-row max-w-md w-full justify-between my-4 py-2 m-auto"
-      >
+      <div className="flex flex-col gap-3 md:flex-row max-w-md w-full justify-between my-4 py-2 m-auto">
         <Link color="foreground" underline="hover" href={"/forgot-password"}>
           Forgot password?
         </Link>
-        <Link color="foreground" underline="hover" href={"/sign-up"}>
+        <Link color="foreground" underline="hover" href={"/signup"}>
           Don&apos;t have an account? Sign up
         </Link>
       </div>

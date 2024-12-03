@@ -1,14 +1,13 @@
 import CreateQuizForm from "@/components/CreateQuizForm";
-import Layout from "@/components/dashboard/Layout";
 import Title from "@/components/layout/Title";
+import Protected from "@/components/layout/Protected";
 import React from "react";
 
 function NewQuiz() {
   return (
-    <Layout>
-      <Title title={"Create Quiz"} />
+    <Protected>
       <CreateQuizForm />
-    </Layout>
+    </Protected>
   );
 }
 

@@ -3,11 +3,11 @@ import { Poppins } from "next/font/google";
 import Providers  from "./providers";
 import { getServerSession } from "next-auth";
 
-const poppins = Poppins({
-  weight: ["300", "400", "500", "600", "700", "800"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-});
+// const poppins = Poppins({
+//   weight: ["300", "400", "500", "600", "700", "800"],
+//   style: ["normal", "italic"],
+//   subsets: ["latin"],
+// });
 
 export const metadata = {
   title: "Quiz App",

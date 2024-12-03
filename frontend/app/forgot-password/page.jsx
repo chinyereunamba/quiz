@@ -1,7 +1,7 @@
 "use client";
 import { AuthSection } from "@/components/layout/Section";
 import Title from "@/components/layout/Title";
-import AuthForm from "@/components/utils/AuthForm";
+import AuthForm from "@/components/auth/AuthForm";
 import { year } from "@/constants";
 import { Link } from "@nextui-org/react";
 import React, { useState } from "react";
@@ -28,7 +28,7 @@ export default function ForgotPassword() {
         />
         <p className="font-normal max-w-md m-auto mt-10 text-center">
           &copy; {year}{" "}
-          <Link href="/" className="font-medium" color="foreground">
+          <Link href="/" className="font-bold" color="foreground">
             QuizApp
           </Link>
           . All rights reserved

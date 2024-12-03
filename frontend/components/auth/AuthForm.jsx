@@ -5,7 +5,7 @@ export default function AuthForm({ inputList = [], btn, handleSubmit }) {
   return (
     <form className="flex flex-col gap-4 max-w-md w-full m-auto">
       {inputList.map((input, index) => (
-        <div className="w-full">
+        <div className="w-full" key={index+1}>
           <label htmlFor={input.name} className="mb-4">
             {input.label}
           </label>

@@ -1,81 +1,76 @@
 import React from "react";
 import { Link } from "@nextui-org/react";
 import FooterTitle from "./FooterTitle";
-import FooterLink from "./FooterLink";
 import { year } from "@/constants";
 
 function Footer() {
   const support = [
     "F. A. Q",
-    "Help and Support",
+    "Help Center",
     "Privacy Policy",
     "Terms of Service",
   ];
 
-  const feature = ["Create Quiz"];
+  const feature = ["Create Quiz", "Take Quiz", "Leaderboards"];
 
-  const about = ["Our story"];
+  const about = ["Our story", "Team", "Careers"];
 
   const social = ["Twitter", "LinkedIn", "GitHub"];
 
   return (
-    <footer>
-      <div className="max-w-7xl m-auto px-4 py-6">
-        <section className="flex justify-between max-md:flex-col gap-6">
-
+    <footer className="bg-content1 text-foreground py-12">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div>
-            <FooterTitle title={"Features"} />
-            <div>
-              <ul>
-                {feature.map((item, index) => (
-                  <FooterLink key={index} content={item} link={"/"} />
-                ))}
-              </ul>
-            </div>
+            <FooterTitle>Features</FooterTitle>
+            <ul className="space-y-2">
+              {feature.map((link, index) => (
+                <li key={index + link}>
+                  <Link href="/">{link}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
           <div>
-            <FooterTitle title={"About"} />
-            <div>
-              <ul>
-                {about.map((item, index) => (
-                  <FooterLink key={index} content={item} link={"/"} />
-                ))}
-              </ul>
-            </div>
+            <FooterTitle>About</FooterTitle>
+            <ul className="space-y-2">
+              {about.map((link, index) => (
+                <li key={index + link}>
+                  <Link href="/">{link}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
           <div>
-            <FooterTitle title={"Support"} />
-            <div>
-              <ul>
-                {support.map((item, index) => (
-                  <FooterLink key={index} content={item} link={"/"} />
-                ))}
-              </ul>
-            </div>
+            <FooterTitle>Support</FooterTitle>
+            <ul className="space-y-2">
+              {support.map((link, index) => (
+                <li key={index + link}>
+                  <Link href="/">{link}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
           <div>
-            <FooterTitle title={"Follow us"} />
-            <div>
-              <ul>
-                {social.map((item, index) => (
-                  <FooterLink key={index} content={item} link={"/"} />
-                ))}
-              </ul>
-            </div>
+            <FooterTitle>Follow Us</FooterTitle>
+            <ul className="space-y-2">
+              {social.map((link, index) => (
+                <li key={index + link}>
+                  <Link href="/">{link}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </section>
-        <div className="flex justify-between items-center mt-4 max-sm:flex-col max-sm:justify-start">
-          <p className=" font-normal">
-            &copy; {year} QuizApp. All rights reserved
-          </p>
-          <p className="font-normal">
+        </div>
+        <div className="mt-12 pt-8 border-t border-foreground/10 flex flex-col sm:flex-row justify-between items-center">
+          <p>© {year} <strong>QuizApp.</strong> All rights reserved</p>
+          <p className="mt-4 sm:mt-0">
             Designed by{" "}
             <Link
-              href="#"
-              about="Developer website"
-              className="font-bold"
+              href="https://chinyereunamba.vercel.app"
               target="_blank"
-              color="foreground"
+              rel="noopener noreferrer"
+              className="font-bold"
             >
               Chinyere Unamba
             </Link>

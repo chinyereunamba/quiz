@@ -13,7 +13,7 @@ function page() {
         <SignUpForm />
         <p className=" font-normal mt-5 text-center">
           &copy; {year}{" "}
-          <Link href="/" className="font-semibold" color="foreground">
+          <Link href="/" className="font-bold" color="foreground">
             QuizApp
           </Link>
           . All rights reserved

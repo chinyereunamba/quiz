@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button, Table, TableHeader, TableColumn } from "@nextui-org/react";
-import DashboardIntro from "./DashboardIntro";
+
 
 function Content() {
   const { data: session } = useSession();
@@ -22,27 +22,9 @@ function Content() {
       });
   }
   return (
-    <>
-      <DashboardIntro />
-    
-      <Button onClick={getData}>Fetch quiz</Button>
-      <table>
-        <thead>
-          <tr>
-            <th>s/N</th>
-            <th>Quiz</th>
-          </tr>
-        </thead>
-        <tbody>
-          {quizData.map((item, index) => (
-            <tr key={index}>
-              <td>{ item.id }</td>
-              <td>{ item.title }</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+    <section>
+      
+   </section>
 
   );
 }
