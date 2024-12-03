@@ -23,7 +23,7 @@ function Testimonial() {
     },
     {
       quote:
-        "I've tried many quiz apps, but this one stands out with its user-friendly interface and diverse question bank.",
+        "I&ldquo;ve tried many quiz apps, but this one stands out with its user-friendly interface and diverse question bank.",
       name: "Mike Brown",
       role: "Teacher",
     },
@@ -36,6 +36,7 @@ function Testimonial() {
         <div className="grid md:grid-cols-3 gap-8">
           {testimony.map((item, index) => (
             <TestimonialCard
+              key={index}
               name={item.name}
               role={item.role}
               quote={item.quote}
@@ -51,7 +52,7 @@ function TestimonialCard({ name, role, quote }) {
   return (
     <Card className="bg-content1">
       <CardBody>
-        <blockquote className="text-lg mb-4">"{quote}"</blockquote>
+        <blockquote className="text-lg mb-4">&quot;{quote}&quot;</blockquote>
         <div className="font-semibold">{name}</div>
         <div className="text-sm text-foreground/70">{role}</div>
       </CardBody>
