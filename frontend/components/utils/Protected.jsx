@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 // import { redirect } from "next/navigation";
 import { BiLogOut } from "react-icons/bi";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Button, Switch, Link, Card, Tooltip } from "@nextui-org/react";
 
@@ -21,8 +21,11 @@ import {
   Search,
   Bell,
   SettingsIcon,
+  BookOpenIcon,
+  TrophyIcon,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useLocalStorage } from "@/hooks/localStorage";
 
 /**  @type {React.FC<React.ReactNode>} */
 export const Protected = ({ children }) => {
@@ -50,14 +53,14 @@ export const Protected = ({ children }) => {
 const navLinks = [
   { name: "Dashboard", href: "/dashboard", icon: ChartBarIcon },
   { name: "Collections", link: "collections", icon: HomeIcon },
-  { name: "Quizzes", link: "quizzes", icon: HomeIcon },
-  { name: "Collections", link: "collections", icon: Book },
+  { name: "Quizzes", link: "quizzes", icon: BookOpenIcon },
+  { name: "Leaderboard", link: "leaderboard", icon: TrophyIcon },
   { name: "Settings", href: "/settings", icon: SettingsIcon },
 ];
 
 /**  @type {React.FC} */
 export function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useLocalStorage("collapsed", null);
   const { theme, setTheme } = useTheme();
 
   return (
@@ -67,19 +70,26 @@ export function Sidebar() {
       } transition-[width] duration-300 ease-in-out`}
     >
       <div
-        className={`fixed bg-secondary flex flex-col  justify-between ${
+        className={`fixed bg-transparent flex flex-col  justify-between ${
           isCollapsed ? "w-20" : "w-64"
         } transition-[width] duration-300 ease-in-out h-screen`}
       >
         <div>
-          <Button
-            isIconOnly
-            aria-label="Toggle Sidebar"
-            className="m-4"
-            onPress={() => setIsCollapsed(!isCollapsed)}
+          <div
+            className={`flex gap-2 items-center flex-1 w-full ${
+              isCollapsed ? "justify-center" : ""
+            }`}
           >
-            {isCollapsed ? <MenuIcon size={20} /> : <XIcon size={20} />}
-          </Button>
+            <Button
+              isIconOnly
+              aria-label="Toggle Sidebar"
+              className="m-4 mx-2"
+              onPress={() => setIsCollapsed(!isCollapsed)}
+            >
+              <MenuIcon size={20} />
+            </Button>
+            {!isCollapsed ? <h3 className="text-xl font-bold">Quizapp</h3>:''}
+          </div>
 
           <div className="flex-1 rounded-md bg-primary p-2 mx-2 flex gap-4 items-center transition-all">
             {isCollapsed ? (
@@ -141,21 +151,30 @@ export function Sidebar() {
               )
             }
           />
-          <Tooltip
-            key={"logout"}
-            content={isCollapsed ? "logout" : null}
-            placement="right"
-          >
+          {isCollapsed ? (
+            <Tooltip
+              key={"logout"}
+              content={isCollapsed ? "logout" : null}
+              placement="right"
+            >
+              <Link
+                href={"logout"}
+                className={`flex cursor-pointer items-center gap-2 text-current
+                  justify-center w-full
+                `}
+              >
+                <LogOut size={24} />
+              </Link>
+            </Tooltip>
+          ) : (
             <Link
               href={"logout"}
-              className={`flex cursor-pointer items-center gap-2 text-current ${
-                isCollapsed ? "justify-center w-full" : ""
-              }`}
+              className={`flex cursor-pointer items-center gap-2 text-current`}
             >
               <LogOut size={24} />
-              {!isCollapsed && <span>Logout</span>}
+              <span>Logout</span>
             </Link>
-          </Tooltip>
+          )}
         </div>
       </div>
     </Card>

@@ -61,7 +61,7 @@ function SectionTwo() {
 }
 function FeatureCard({ icon, title, description }) {
   return (
-    <Card className="bg-content1 hover:bg-content2 transition-colors">
+    <Card className="bg-content1 hover:bg-content2 transition-colors cursor-pointer">
       <CardBody>
         <div className="flex flex-col items-center text-center">
           <div className="mb-4 text-primary">{icon}</div>

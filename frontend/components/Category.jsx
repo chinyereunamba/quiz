@@ -3,7 +3,7 @@ import { Card, CardBody, Image } from "@nextui-org/react";
 
 function Category({ image, title, description, className }) {
   return (
-    <Card className="bg-content2 hover:bg-content3 transition-colors cursor-pointer max-w-sm">
+    <Card className="bg-content1 hover:bg-content2 transition-colors cursor-pointer max-w-sm">
       <CardBody className="p-0">
         <Image
           src={image}

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Custom404() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-primary via-secondary to-primary">
       <Card className="w-full max-w-md">
         <CardBody className="flex flex-col items-center text-center gap-4 p-8">
           <HelpCircleIcon size={64} className="text-warning" />
@@ -25,7 +25,7 @@ export default function Custom404() {
             >
               Go Home
             </Button>
-            <Button as={Link} href="/quizzes" color="secondary" variant="flat">
+            <Button as={Link} href="/quizzes" variant="flat">
               Browse Quizzes
             </Button>
           </div>
