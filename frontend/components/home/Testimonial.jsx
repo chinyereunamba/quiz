@@ -1,5 +1,5 @@
 import React from "react";
-import Title from "./layout/Title";
+import Title from "../layout/Title";
 import { Card, CardBody } from "@nextui-org/react";
 
 function Testimonial() {

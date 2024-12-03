@@ -1,7 +1,7 @@
 "use client";
 import { AuthSection } from "@/components/layout/Section";
 import Title from "@/components/layout/Title";
-import AuthForm from "@/components/utils/AuthForm";
+import AuthForm from "@/components/auth/AuthForm";
 import { year } from "@/constants";
 import { Link } from "@nextui-org/react";
 import React, { useState } from "react";

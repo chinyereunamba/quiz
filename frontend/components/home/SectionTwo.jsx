@@ -1,7 +1,7 @@
 import React from "react";
-import FeaturesCard from "./Card";
-import Title from "./layout/Title";
-import Section from "./layout/Section";
+import FeaturesCard from "../Card";
+import Title from "../layout/Title";
+import Section from "../layout/Section";
 import { Card, CardBody } from "@nextui-org/react";
 import { BookOpen, Brain, Users } from "lucide-react";
 

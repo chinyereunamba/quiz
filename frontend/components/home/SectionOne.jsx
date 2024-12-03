@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import Title from "./layout/Title";
-import Section from "./layout/Section";
+import Title from "../layout/Title";
+import Section from "../layout/Section";
 import Category from "./Category";
 
 function SectionOne() {
