@@ -4,9 +4,6 @@ import React from "react";
 
 import { useState } from "react";
 import {
-  Card,
-  CardBody,
-  CardHeader,
   Switch,
   Input,
   Select,
@@ -24,6 +21,7 @@ import {
   Volume2,
   EyeClosed,
 } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 export default function Settings() {
   const [notifications, setNotifications] = useState({
@@ -41,6 +39,8 @@ export default function Settings() {
     { label: "French", value: "fr" },
     { label: "German", value: "de" },
   ];
+  const { data: session, status } = useSession();
+
 
   return (
     <Protected>
@@ -59,8 +59,8 @@ export default function Settings() {
             </div>
           </div>
           <div className="my-4 flex flex-col gap-4">
-            <Input type="text" label="Display Name" />
-            <Input label="Email" type="email" />
+            <Input type="text" label="Display Name" value={session.user.name} />
+            <Input label="Email" type="email" value={session.user.email}/>
             <Button color="primary" className="w-fit rounded-md">
               Update Profile
             </Button>

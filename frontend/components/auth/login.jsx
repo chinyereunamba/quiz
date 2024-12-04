@@ -26,7 +26,7 @@ function LoginForm() {
       callbackUrl: "/dashboard",
     };
 
-    // signIn("credentials", data);
+    signIn("credentials", data);
     console.log(data);
   }
 
@@ -40,6 +40,7 @@ function LoginForm() {
             label: "Email",
             placeholder: "johndoe@gmail.com",
             name: "email",
+            type: "text",
             value: log.email,
             handleChange(e) {
               setLog({ ...log, email: e.target.value });
@@ -49,6 +50,7 @@ function LoginForm() {
             label: "Password",
             placeholder: "**********",
             name: "password",
+            type: "password",
             value: log.password,
             handleChange(e) {
               setLog({ ...log, password: e.target.value });

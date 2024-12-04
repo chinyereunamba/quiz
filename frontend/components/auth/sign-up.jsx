@@ -54,7 +54,7 @@ function SignUpForm() {
             label: "Name",
             placeholder: "John Doe",
             name: "name",
-            value: user.email,
+            value: user.name,
             handleChange(e) {
               setUser({ ...user, name: e.target.value });
             },

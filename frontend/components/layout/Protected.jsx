@@ -1,11 +1,17 @@
 "use client";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 // import { redirect } from "next/navigation";
 import { BiLogOut } from "react-icons/bi";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { Button, Switch, Link, Card, Tooltip } from "@nextui-org/react";
+import {
+  Button,
+  Switch,
+  Link,
+  Card,
+  Tooltip,
+  Skeleton,
+} from "@nextui-org/react";
 
 import {
   HomeIcon,
@@ -30,18 +36,18 @@ import { useLocalStorage } from "@/hooks/localStorage";
 /**  @type {React.FC<React.ReactNode>} */
 export const Protected = ({ children }) => {
   const path = usePathname().split("/")[1];
-  // const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
-  // if (status === "loading") {
-  //   return <h1>Loading...</h1>;
-  // }
-  // if (status === "unauthenticated") {
-  //   return redirect("/login");
-  // }
+  if (status === "loading") {
+    return <h1>Loading...</h1>;
+  }
+  if (status === "unauthenticated") {
+    return redirect("/login");
+  }
 
   return (
     <div className="flex transition-[width]">
-      <Sidebar />
+      <Sidebar name={session.user.name} />
       <main className="flex-1">
         <Header name={path.split("-").join(" ")} />
         <section className="p-8">{children}</section>
@@ -59,21 +65,19 @@ const navLinks = [
 ];
 
 /**  @type {React.FC} */
-export function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+export function Sidebar({ name }) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const { theme, setTheme } = useTheme();
   const path = usePathname();
 
-  
-
   return (
     <Card
-      className={`h-screen rounded-none shadow-none ${
+      className={`h-screen rounded-none bg-transparent shadow-none ${
         isCollapsed ? "w-20" : "w-64"
       } transition-[width] duration-300 ease-in-out`}
     >
       <div
-        className={`fixed bg-transparent flex flex-col  justify-between ${
+        className={`fixed bg-content1 flex flex-col  justify-between ${
           isCollapsed ? "w-20" : "w-64"
         } transition-[width] duration-300 ease-in-out h-screen`}
       >
@@ -104,7 +108,7 @@ export function Sidebar() {
                 <span className="h-12 w-12 bg-white grid place-items-center rounded-full">
                   <UserIcon size={24} />
                 </span>
-                <p className="font-bold text-background">Chinyere</p>
+                <p className="font-bold text-background capitalize">{name}</p>
               </>
             )}
           </div>
@@ -191,14 +195,21 @@ export function Sidebar() {
 export default Protected;
 
 export function Header({ name }) {
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
   return (
-    <header className="px-8 py-4 border-b flex justify-between sticky top-0 bg-background z-40">
-      <h3 className="capitalize text-xl font-bold">{name}</h3>
+    <Suspense fallback={<HeaderFallback />}>
+      <header className="px-8 py-4 border-b flex justify-between sticky top-0 bg-background z-40">
+        <h3 className="capitalize text-xl font-bold">{name}</h3>
 
-      <div className="flex gap-2 items-center">
-        <Search />
-        <Bell />
-      </div>
-    </header>
+        <div className="flex gap-2 items-center">
+          <Search />
+          <Bell />
+        </div>
+      </header>
+    </Suspense>
   );
+}
+
+function HeaderFallback() {
+  return <Skeleton className="rounded-md w-full h-full" />;
 }
