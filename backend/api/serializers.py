@@ -11,7 +11,7 @@ User = get_user_model()
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "email", "first_name", "last_name", "is_admin"]
+        fields = ["id", "name", "email", "is_admin"]
 
 
 class CustomRegisterSerializer(RegisterSerializer):
@@ -21,9 +21,7 @@ class CustomRegisterSerializer(RegisterSerializer):
         super(CustomRegisterSerializer, self).get_cleaned_data()
         return {
             "email": self.validated_data.get("email", ""),
-            "first_name": self.validated_data.get("first_name", ""),
-            "last_name": self.validated_data.get("last_name", ""),
-            "username": self.validated_data.get("username", ""),
+            "name": self.validated_data.get("name", ""),
             "password1": self.validated_data.get("password1", ""),
             "password2": self.validated_data.get("password2", ""),
         }
