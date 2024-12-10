@@ -1,11 +1,17 @@
 "use client";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 // import { redirect } from "next/navigation";
 import { BiLogOut } from "react-icons/bi";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import { Button, Switch, Link, Card, Tooltip } from "@nextui-org/react";
+import {
+  Button,
+  Switch,
+  Link,
+  Card,
+  Tooltip,
+  Skeleton,
+} from "@nextui-org/react";
 
 import {
   HomeIcon,
@@ -30,18 +36,18 @@ import { useLocalStorage } from "@/hooks/localStorage";
 /**  @type {React.FC<React.ReactNode>} */
 export const Protected = ({ children }) => {
   const path = usePathname().split("/")[1];
-  // const { data: session, status } = useSession();
+  const { data: session, status } = useSession();
 
-  // if (status === "loading") {
-  //   return <h1>Loading...</h1>;
-  // }
-  // if (status === "unauthenticated") {
-  //   return redirect("/login");
-  // }
+  if (status === "loading") {
+    return <h1>Loading...</h1>;
+  }
+  if (status === "unauthenticated") {
+    return redirect("/login");
+  }
 
   return (
     <div className="flex transition-[width]">
-      <Sidebar />
+      <Sidebar name={session.user.name} />
       <main className="flex-1">
         <Header name={path.split("-").join(" ")} />
         <section className="p-8">{children}</section>
@@ -53,29 +59,30 @@ export const Protected = ({ children }) => {
 const navLinks = [
   { name: "Dashboard", href: "/dashboard", icon: ChartBarIcon },
   { name: "Collections", link: "collections", icon: HomeIcon },
-  { name: "Quizzes", href: "quizzes", icon: BookOpenIcon },
+  { name: "Quizzes", href: "/quizzes", icon: BookOpenIcon },
   { name: "Leaderboard", link: "leaderboard", icon: TrophyIcon },
   { name: "Settings", href: "/settings", icon: SettingsIcon },
 ];
 
 /**  @type {React.FC} */
-export function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useLocalStorage("collapsed", null);
+export function Sidebar({ name }) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const { theme, setTheme } = useTheme();
+  const path = usePathname();
 
   return (
     <Card
-      className={`h-screen rounded-none shadow-none ${
+      className={`h-screen rounded-none bg-transparent shadow-none ${
         isCollapsed ? "w-20" : "w-64"
       } transition-[width] duration-300 ease-in-out`}
     >
       <div
-        className={`fixed bg-transparent flex flex-col  justify-between ${
+        className={`fixed bg-content1 flex flex-col  justify-between ${
           isCollapsed ? "w-20" : "w-64"
         } transition-[width] duration-300 ease-in-out h-screen`}
       >
         <div>
-          <div
+          <header
             className={`flex gap-2 items-center flex-1 w-full ${
               isCollapsed ? "justify-center" : ""
             }`}
@@ -88,8 +95,8 @@ export function Sidebar() {
             >
               <MenuIcon size={20} />
             </Button>
-            {!isCollapsed ? <h3 className="text-xl font-bold">Quizapp</h3>:''}
-          </div>
+            {!isCollapsed ? <p className="text-xl font-bold">Quizapp</p> : ""}
+          </header>
 
           <div className="flex-1 rounded-md bg-primary p-2 mx-2 flex gap-4 items-center transition-all">
             {isCollapsed ? (
@@ -101,7 +108,7 @@ export function Sidebar() {
                 <span className="h-12 w-12 bg-white grid place-items-center rounded-full">
                   <UserIcon size={24} />
                 </span>
-                <p className="font-bold text-background">Chinyere</p>
+                <p className="font-bold text-background capitalize">{name}</p>
               </>
             )}
           </div>
@@ -115,7 +122,9 @@ export function Sidebar() {
                 <Tooltip key={item.name} content={item.name} placement="right">
                   <Link
                     href={item.href}
-                    className="flex items-center gap-2 text-current justify-center p-3 hover:bg-secondary rounded-md"
+                    className={`flex items-center gap-2 text-current justify-center p-3 hover:bg-secondary rounded-md ${
+                      path == item.href ? "bg-secondary" : ""
+                    }`}
                   >
                     <item.icon size={24} />
                   </Link>
@@ -124,7 +133,9 @@ export function Sidebar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center gap-2 text-current hover:bg-secondary w-full p-3 rounded-md"
+                  className={`flex items-center gap-2 text-current hover:bg-secondary w-full p-3 rounded-md ${
+                    path == item.href ? "bg-secondary" : ""
+                  }`}
                 >
                   <item.icon size={24} />
                   <span>{item.name}</span>
@@ -184,14 +195,21 @@ export function Sidebar() {
 export default Protected;
 
 export function Header({ name }) {
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
   return (
-    <header className="px-8 py-4 border-b flex justify-between sticky top-0 bg-background z-40">
-      <h3 className="capitalize text-xl font-bold">{name}</h3>
+    <Suspense fallback={<HeaderFallback />}>
+      <header className="px-8 py-4 border-b flex justify-between sticky top-0 bg-background z-40">
+        <h3 className="capitalize text-xl font-bold">{name}</h3>
 
-      <div className="flex gap-2 items-center">
-        <Search />
-        <Bell />
-      </div>
-    </header>
+        <div className="flex gap-2 items-center">
+          <Search />
+          <Bell />
+        </div>
+      </header>
+    </Suspense>
   );
+}
+
+function HeaderFallback() {
+  return <Skeleton className="rounded-md w-full h-full" />;
 }

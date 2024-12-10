@@ -13,7 +13,8 @@ export default function Custom404() {
           <h1 className="text-4xl font-bold">404</h1>
           <h2 className="text-2xl font-semibold">Page Not Found</h2>
           <p className="text-lg">
-            Oops! The page you're looking for doesn't exist or has been moved.
+            Oops! The page you&ldquo;re looking for doesn&ldquo;t exist or has
+            been moved.
           </p>
           <div className="flex gap-4 mt-4">
             <Button
